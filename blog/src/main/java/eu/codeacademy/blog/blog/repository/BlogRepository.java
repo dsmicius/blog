@@ -14,4 +14,8 @@ public class BlogRepository {
     public void save(Blog blog) {
         blogs.add(blog);
     }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
 }

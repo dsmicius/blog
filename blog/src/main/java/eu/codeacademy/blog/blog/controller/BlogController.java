@@ -24,4 +24,10 @@ public class BlogController {
         blogService.addBlog(blog);
         return "blog";
     }
+
+    @GetMapping("/blogs/list")
+    public String getBlogs(Model model) {
+        model.addAttribute("blogList", blogService.getBlogs());
+        return "blogs";
+    }
 }

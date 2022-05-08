@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Blogs</title>
+</head>
+<body>
+<div th:if="${blogList.isEmpty()}">List is Empty</div>
+<div th:unless="${blogList.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blog: ${blogList}">
+            <td th:text="${blog.getSubject()}"></td>
+            <td th:text="${blog.getDescription()}"></td>
+            <td>DELETE</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
