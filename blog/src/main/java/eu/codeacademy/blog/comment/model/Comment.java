@@ -1,6 +1,6 @@
 package eu.codeacademy.blog.comment.model;
 
-import eu.codeacademy.blog.blog.model.Blog;
+import eu.codeacademy.blog.blog.dto.BlogDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,5 +16,5 @@ public class Comment {
     private LocalDateTime created;
     private LocalDateTime deleted;
     private LocalDateTime updated;
-    private Blog blog;
+    private BlogDto blog;
 }

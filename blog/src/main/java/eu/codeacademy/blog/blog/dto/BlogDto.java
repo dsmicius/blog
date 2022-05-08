@@ -1,20 +1,20 @@
-package eu.codeacademy.blog.blog.model;
+package eu.codeacademy.blog.blog.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
 @Builder
-public class Blog {
+public class BlogDto {
     private UUID blogId;
     private String subject;
     private String description;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
-    private LocalDateTime deleteDate;
+    private Date createDate;
+    private Date updateDate;
+    private Date deleteDate;
     private String author;
     private String status;
 }

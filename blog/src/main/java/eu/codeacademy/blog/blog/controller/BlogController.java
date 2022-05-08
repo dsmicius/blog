@@ -1,6 +1,6 @@
 package eu.codeacademy.blog.blog.controller;
 
-import eu.codeacademy.blog.blog.model.Blog;
+import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,12 +17,12 @@ public class BlogController {
 
     @GetMapping
     public String openCreateBlogForm(Model model) {
-        model.addAttribute("blog", Blog.builder().build());
+        model.addAttribute("blog", BlogDto.builder().build());
         return "blog";
     }
 
     @PostMapping
-    public String createBlog(Model model, Blog blog) {
+    public String createBlog(Model model, BlogDto blog) {
         blogService.addBlog(blog);
         model.addAttribute("message","Blog entry " + blog.getSubject() + " added success");
         return "blog";
@@ -41,7 +41,7 @@ public class BlogController {
     }
 
     @PostMapping("/{blogId}/update")
-    public String updateBlog(Model model, Blog blog) {
+    public String updateBlog(Model model, BlogDto blog) {
         blogService.updateBlog(blog);
         model.addAttribute("blogList", blogService.getBlogs());
         return "blogs2";

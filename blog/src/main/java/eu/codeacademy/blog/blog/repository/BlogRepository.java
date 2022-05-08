@@ -1,33 +1,12 @@
 package eu.codeacademy.blog.blog.repository;
 
-
-import eu.codeacademy.blog.blog.model.Blog;
+import eu.codeacademy.blog.blog.dto.BlogDto;
+import eu.codeacademy.blog.blog.entity.Blog;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
-
 @Repository
-public class BlogRepository {
-    private final Map<UUID, Blog> blogs = new HashMap<>();
+public interface BlogRepository extends JpaRepository<Blog, Long> {
 
-    public void save(Blog blog) {
-        blog.setBlogId(UUID.randomUUID());
-        blogs.put(blog.getBlogId(), blog);
-    }
-
-    public List<Blog> getBlogs() {
-        return new ArrayList<>(blogs.values());
-    }
-
-    public Blog getBlogByUUID(UUID id) {
-        return blogs.get(id);
-    }
-
-    public void update(Blog blog) {
-        blogs.put(blog.getBlogId(),blog);
-    }
-
-    public void delete(UUID id) {
-        blogs.remove(id);
-    }
 }
