@@ -73,6 +73,20 @@
         div.edit {
             text-align: left;
         }
+
+        .box-header {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            padding: 2px;
+        }
+
+        div.subj {
+            text-align: left;
+        }
+
+        div.create-date {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -101,9 +115,15 @@
     <div class="content">
         <div th:each="blog: ${blogList}">
             <div class="box zoom">
-                <div class="subj">
-                    <p><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                          th:text="${blog.getSubject()}"></a></p>
+                <div class="box-header">
+                    <div class="subj">
+                        <p><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
+                              th:text="${blog.getSubject()}"></a></p>
+                    </div>
+                    <div class="create-date">
+                        <p th:text="${blog.getCreateDate()}"></p>
+                        <i th:text="${blog.getAuthor()}"></i>
+                    </div>
                 </div>
                 <br>
                 <i th:text="${blog.getDescription()}"></i>

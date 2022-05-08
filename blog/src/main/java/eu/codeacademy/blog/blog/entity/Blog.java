@@ -1,27 +1,34 @@
 package eu.codeacademy.blog.blog.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Blog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private UUID blogId;
     private String subject;
     private String description;
-    private Date createDate;
-    private Date updateDate;
-    private Date deleteDate;
+    private String createDate;
+    private String updateDate;
+    private String deleteDate;
     private String author;
     private String status;
 

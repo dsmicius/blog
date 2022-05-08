@@ -12,9 +12,9 @@ public class BlogDto {
     private UUID blogId;
     private String subject;
     private String description;
-    private Date createDate;
-    private Date updateDate;
-    private Date deleteDate;
+    private String createDate;
+    private String updateDate;
+    private String deleteDate;
     private String author;
     private String status;
 }

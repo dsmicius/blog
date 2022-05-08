@@ -1,8 +1,10 @@
 package eu.codeacademy.blog.blog.service;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
+import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.blog.mapper.BlogMapper;
 import eu.codeacademy.blog.blog.repository.BlogRepository;
+import eu.codeacademy.blog.utils.CurrentDate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,19 @@ public class BlogService {
 
     private final BlogRepository blogRepository;
     private final BlogMapper mapper;
+    private final CurrentDate currentDate;
 
     public void addBlog(BlogDto blog) {
-//        blogRepository.save(blog);
+        blogRepository.save(Blog.builder()
+                .blogId(UUID.randomUUID())
+                .subject(blog.getSubject())
+                .description(blog.getDescription())
+                .createDate(currentDate.getCurrentDate())
+                .updateDate(blog.getUpdateDate())
+                .deleteDate(blog.getDeleteDate())
+                .author(blog.getAuthor())
+                .status(blog.getStatus())
+                .build());
     }
 
     public List<BlogDto> getBlogs() {
@@ -28,8 +40,8 @@ public class BlogService {
     }
 
     public BlogDto getBlogByUUID(UUID id) {
-//        return blogRepository.getBlogByUUID(id);
-        return null;
+
+        return mapper.mapTo(blogRepository.findByBlogId(id));
     }
 
     public void updateBlog(BlogDto blog) {

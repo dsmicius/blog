@@ -24,6 +24,7 @@ public class BlogController {
     @PostMapping
     public String createBlog(Model model, BlogDto blog) {
         blogService.addBlog(blog);
+        model.addAttribute("blog", BlogDto.builder().build());
         model.addAttribute("message","Blog entry " + blog.getSubject() + " added success");
         return "blog";
     }
