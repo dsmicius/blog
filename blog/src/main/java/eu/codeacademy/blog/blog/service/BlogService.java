@@ -7,6 +7,7 @@ import eu.codeacademy.blog.blog.repository.BlogRepository;
 import eu.codeacademy.blog.utils.CurrentDate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,16 +21,16 @@ public class BlogService {
     private final BlogMapper mapper;
     private final CurrentDate currentDate;
 
-    public void addBlog(BlogDto blog) {
+    public void addBlog(BlogDto blogDto) {
         blogRepository.save(Blog.builder()
                 .blogId(UUID.randomUUID())
-                .subject(blog.getSubject())
-                .description(blog.getDescription())
+                .subject(blogDto.getSubject())
+                .description(blogDto.getDescription())
                 .createDate(currentDate.getCurrentDate())
-                .updateDate(blog.getUpdateDate())
-                .deleteDate(blog.getDeleteDate())
-                .author(blog.getAuthor())
-                .status(blog.getStatus())
+                .updateDate(blogDto.getUpdateDate())
+                .deleteDate(blogDto.getDeleteDate())
+                .author(blogDto.getAuthor())
+                .status(blogDto.getStatus())
                 .build());
     }
 
@@ -44,13 +45,22 @@ public class BlogService {
         return mapper.mapTo(blogRepository.findByBlogId(id));
     }
 
-    public void updateBlog(BlogDto blog) {
-
-//        blogRepository.update(blog);
+    @Transactional
+    public void updateBlog(BlogDto blogDto) {
+        Blog blog = blogRepository.findByBlogId(blogDto.getBlogId()).toBuilder()
+                .subject(blogDto.getSubject())
+                .description(blogDto.getDescription())
+                .createDate(currentDate.getCurrentDate())
+                .updateDate(blogDto.getUpdateDate())
+                .deleteDate(blogDto.getDeleteDate())
+                .author(blogDto.getAuthor())
+                .status(blogDto.getStatus())
+                .build();
+        blogRepository.save(blog);
     }
 
+    @Transactional
     public void deleteBlog(UUID id) {
-
-//        blogRepository.delete(id);
+        blogRepository.deleteById(blogRepository.findByBlogId(id).getId());
     }
 }
