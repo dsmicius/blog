@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Create Blog</title>
 </head>
 <body>
 <h3>Create Blog:</h3>
-<form action="" method="post">
+<form action="" method="post" th:object="${blog}">
     <label>Subject:</label><br>
-    <input type="text" placeholder="please enter subject of Blog entry" size="53" name="subject">
+    <input type="text" placeholder="please enter subject of Blog entry" size="53" th:field="*{subject}">
     <br>
     <br>
     <label>Description:</label><br>
-    <textarea type="text" placeholder="please enter description of Blog entry" rows="10" cols="50" name="description"></textarea>
+    <textarea type="text" placeholder="please enter description of Blog entry" rows="10" cols="50" th:field="*{description}"></textarea>
     <br>
     <br>
     <button type="submit">Create</button>
