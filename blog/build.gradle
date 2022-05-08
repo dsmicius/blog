@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'eu.codeacademy'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    devToolsVersion = '2.6.7'
+    h2Version = '2.1.212'
+    postgresVersion = '42.3.4'
+    mysqlVersion = '8.0.29'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-devtools:${devToolsVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation "com.h2database:h2:${h2Version}"
+    implementation "org.postgresql:postgresql:${postgresVersion}"
+    implementation "mysql:mysql-connector-java:${mysqlVersion}"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
