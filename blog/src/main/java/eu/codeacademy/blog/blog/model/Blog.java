@@ -8,7 +8,7 @@ import java.util.UUID;
 @Data
 @Builder
 public class Blog {
-    private UUID uuid;
+    private UUID blogId;
     private String subject;
     private String description;
 }

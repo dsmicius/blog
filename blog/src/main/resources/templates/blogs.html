@@ -19,9 +19,9 @@
         </thead>
         <tbody>
         <tr th:each="blog: ${blogList}">
-            <td><a th:href="@{'/blogs/update?id=' + ${blog.getUuid()}}" th:text="${blog.getSubject()}"></a></td>
+            <td><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}" th:text="${blog.getSubject()}"></a></td>
             <td th:text="${blog.getDescription()}"></td>
-            <td><a th:href="@{'/blogs/delete?id=' + ${blog.getUuid()}}" th:text="DELETE"></a></td>
+            <td><a th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}" th:text="DELETE"></a></td>
         </tr>
         </tbody>
     </table>

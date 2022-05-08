@@ -11,8 +11,8 @@ public class BlogRepository {
     private final Map<UUID, Blog> blogs = new HashMap<>();
 
     public void save(Blog blog) {
-        blog.setUuid(UUID.randomUUID());
-        blogs.put(blog.getUuid(), blog);
+        blog.setBlogId(UUID.randomUUID());
+        blogs.put(blog.getBlogId(), blog);
     }
 
     public List<Blog> getBlogs() {
@@ -24,7 +24,7 @@ public class BlogRepository {
     }
 
     public void update(Blog blog) {
-        blogs.put(blog.getUuid(),blog);
+        blogs.put(blog.getBlogId(),blog);
     }
 
     public void delete(UUID id) {
