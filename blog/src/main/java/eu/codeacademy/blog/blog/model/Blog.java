@@ -1,12 +1,14 @@
 package eu.codeacademy.blog.blog.model;
 
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Data
-@Component
+@Builder
 public class Blog {
-
+    private UUID uuid;
     private String subject;
     private String description;
 }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,4 +22,15 @@ public class BlogService {
         return blogRepository.getBlogs();
     }
 
+    public Blog getBlogByUUID(UUID id) {
+        return blogRepository.getBlogByUUID(id);
+    }
+
+    public void updateBlog(Blog blog) {
+        blogRepository.update(blog);
+    }
+
+    public void deleteBlog(UUID id) {
+        blogRepository.delete(id);
+    }
 }
