@@ -3,17 +3,18 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Create Blog</title>
 </head>
 <body>
 <h3>Create Blog:</h3>
 <form action="" method="post" th:object="${blog}">
     <label>Subject:</label><br>
-    <input type="text" placeholder="please enter subject of Blog entry" size="53" th:field="*{subject}">
+    <input type="text" placeholder="please enter subject of Blog entry" size="50" th:field="*{subject}">
     <br>
     <br>
     <label>Description:</label><br>
-    <textarea type="text" placeholder="please enter description of Blog entry" rows="10" cols="50"
+    <textarea type="text" placeholder="please enter description of Blog entry" rows="10" cols="80"
               th:field="*{description}"></textarea>
     <br>
     <br>
