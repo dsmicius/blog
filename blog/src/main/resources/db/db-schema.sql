@@ -1,0 +1,11 @@
+CREATE TABLE BLOG (
+    id INT PRIMARY KEY,
+    blogId UUID NOT NULL,
+    subject VARCHAR(50) NOT NULL,
+    description VARCHAR(1000) DEFAULT NULL,
+    createDate DATE DEFAULT NULL,
+    updateDate DATE DEFAULT NULL,
+    deleteDate DATE DEFAULT NULL,
+    author VARCHAR(50) DEFAULT NULL,
+    status VARCHAR(15) DEFAULT NULL
+);

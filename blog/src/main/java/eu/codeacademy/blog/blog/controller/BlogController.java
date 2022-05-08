@@ -31,7 +31,7 @@ public class BlogController {
     @GetMapping("/list")
     public String getBlogs(Model model) {
         model.addAttribute("blogList", blogService.getBlogs());
-        return "blogs";
+        return "blogs2";
     }
 
     @GetMapping("/{blogId}/update")
@@ -44,13 +44,13 @@ public class BlogController {
     public String updateBlog(Model model, Blog blog) {
         blogService.updateBlog(blog);
         model.addAttribute("blogList", blogService.getBlogs());
-        return "blogs";
+        return "blogs2";
     }
 
     @GetMapping("/{blogId}/delete")
     public String deleteBlog(Model model, @PathVariable("blogId") UUID id) {
         blogService.deleteBlog(id);
         model.addAttribute("blogList",blogService.getBlogs());
-        return "blogs";
+        return "blogs2";
     }
 }

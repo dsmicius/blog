@@ -20,8 +20,8 @@ public class MockDataConfig {
         int counter = 0;
         while (MAX_COUNT >= counter) {
             blogRepository.save(Blog.builder()
-                    .subject("subj " + counter)
-                    .description("desc " + (counter * 2))
+                    .subject("Trumpas aprasymas Nr. " + counter)
+                    .description("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est id sapiente totam! Ad eum expedita impedit soluta vero voluptas! Aliquam deserunt earum magnam molestiae nemo omnis quisquam reprehenderit totam vero.")
                     .build());
             counter++;
         }

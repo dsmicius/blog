@@ -1,3 +1,22 @@
 spring:
   main:
     banner-mode: console
+  datasource:
+    url: jdbc:h2:mem:blogdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  sql:
+    init:
+      schema-locations: classpath:db/db-schema.sql
+#      data-locations: classpath:db/initial-data.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2
+logging:
+  level:
+    eu:
+      codeacademy:
+        eshop:
+          config: DEBUG
