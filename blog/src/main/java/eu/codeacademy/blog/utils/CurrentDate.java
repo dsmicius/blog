@@ -7,10 +7,8 @@ import java.util.Date;
 
 @Component
 public class CurrentDate {
-
-
     public String getCurrentDate() {
-        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:ss");
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return dateFormat.format(new Date());
     }
 

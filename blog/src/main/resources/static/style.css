@@ -1,0 +1,81 @@
+.container {
+    width: 95%;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 1em;
+}
+
+div.box {
+    border: 1px solid black;
+    background-color: #cecccc;
+    padding: 2px;
+}
+
+a:link {
+    color: #d29218;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #70aabe;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.zoom {
+    transition: transform 0.5s;
+    cursor: pointer;
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    filter: grayscale(100);
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding: 2px;
+}
+
+div.delete {
+    text-align: right;
+}
+
+div.edit {
+    text-align: left;
+}
+
+.box-header {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding: 2px;
+}
+
+div.subj {
+    text-align: left;
+}
+
+div.create-date {
+    text-align: right;
+}
+div.footer {
+    text-align: center;
+}
