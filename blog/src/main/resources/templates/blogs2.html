@@ -42,24 +42,30 @@
             </div>
             <div class="filter-content">
                 <p>
-                    <a th:href="@{/blogs/list(sort='subject,ASC')}">
-                        Subject
-                        <i class="fa-solid fa-arrow-down-a-z"
-                           th:if="${blogPage.sort.getOrderFor('subject') ne null}"></i>
-                    </a>
-                </p>
-                <p>
-                    <a th:href="@{/blogs/list(sort='createDate,ASC')}">
+                    <a th:with="direction=${blogPage.sort.getOrderFor('createDate')?.direction}"
+                       th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
                         Created
-                        <i class="fa-solid fa-arrow-down-1-9"
-                           th:if="${blogPage.sort.getOrderFor('createDate') ne null}"></i>
+                        <i class="fa-solid"
+                           th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-9-1' : 'fa-arrow-up-1-9'}"
+                           th:if="${direction ne null}"></i>
                     </a>
                 </p>
                 <p>
-                    <a th:href="@{/blogs/list(sort='author,ASC')}">
+                    <a th:with="direction=${blogPage.sort.getOrderFor('subject')?.direction}"
+                       th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
+                        Subject
+                        <i class="fa-solid"
+                           th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
+                           th:if="${direction ne null}"></i>
+                    </a>
+                </p>
+                <p>
+                    <a th:with="direction=${blogPage.sort.getOrderFor('author')?.direction}"
+                       th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
                         Author
-                        <i class="fa-solid fa-arrow-down-a-z"
-                           th:if="${blogPage.sort.getOrderFor('author') ne null}"></i>
+                        <i class="fa-solid"
+                           th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
+                           th:if="${direction ne null}"></i>
                     </a>
                 </p>
             </div>
