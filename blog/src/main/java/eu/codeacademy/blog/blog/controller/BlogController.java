@@ -3,6 +3,8 @@ package eu.codeacademy.blog.blog.controller;
 import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +32,8 @@ public class BlogController {
     }
 
     @GetMapping("/list")
-    public String getBlogs(Model model) {
-        model.addAttribute("blogList", blogService.getBlogs());
+    public String getBlogs(Model model, @PageableDefault(size = 2) Pageable pageable) {
+        model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
         return "blogs2";
     }
 

@@ -10,63 +10,92 @@
     <title>List of Blogs 2</title>
 </head>
 <body>
+<div th:if="${#lists.isEmpty(blogPage)}">List is Empty</div>
+<div th:unless="${#lists.isEmpty(blogPage)}">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Blog</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<br><br>
-
-<div class="container">
-    <div class="content">
-        <div th:each="blog: ${blogList}">
-            <div class="box zoom">
-                <div class="box-header">
-                    <div class="subj">
-                        <p><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                              th:text="${blog.getSubject()}"></a></p>
-                    </div>
-                    <div class="create-date">
-                        <p th:text="${blog.getCreateDate()}"></p>
-                        <i th:text="${blog.getAuthor()}"></i>
-                    </div>
-                </div>
-                <br>
-                <i th:text="${blog.getDescription()}"></i>
-                <br>
-                <div class="actions">
-                    <div class="edit">
-                        <i><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                              th:text="EDIT"></a></i>
-                    </div>
-                    <div class="delete">
-                        <i><a th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}"
-                              th:text="DELETE"></a></i>
-                    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">New Blog</a>
+                    <a class="nav-link" href="#">List Blogs</a>
+                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="#">Cart</a>
+                    <a class="nav-link justify-content-right" href="#">Languages</a>
                 </div>
             </div>
         </div>
+    </nav>
+
+    <br><br>
+
+    <div class="container">
+        <div class="content">
+            <div th:each="blog: ${blogPage}">
+                <div class="box zoom">
+                    <div class="box-header">
+                        <div class="subj">
+                            <p><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
+                                  th:text="${blog.getSubject()}"></a></p>
+                        </div>
+                        <div class="create-date">
+                            <p th:text="${blog.getCreateDate()}"></p>
+                            <i th:text="${blog.getAuthor()}"></i>
+                        </div>
+                    </div>
+                    <br>
+                    <i th:text="${blog.getDescription()}"></i>
+                    <br>
+                    <div class="actions">
+                        <div class="edit">
+                            <i><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
+                                  th:text="EDIT"></a></i>
+                        </div>
+                        <div class="delete">
+                            <i><a th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}"
+                                  th:text="DELETE"></a></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<br><br>
-<div class="footer">
-    <footer>
-        <p>Copyright © 2022 Dominykas<br>
-    </footer>
+    <br>
+    <span class="d-flex justify-content-center" th:text="'Total elements: ' + ${blogPage.totalElements}"></span><br>
+    <!--    <span th:text="'Total pages: ' + ${blogPage.totalPages}"></span>-->
+
+    <nav class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item"
+                th:classappend="${blogPage.hasPrevious() ? '' : 'disabled'}"
+            >
+                <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} -1)}" th:text="Previous"></a>
+            </li>
+            <li class="page-item"
+                th:each="pageNumber: ${#numbers.sequence(0, blogPage.totalPages - 1)}"
+                th:classappend="${pageNumber == blogPage.number ? 'active' : ''}"
+            >
+                <a class="page-link" th:href="@{/blogs/list(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+            </li>
+            <li class="page-item"
+                th:classappend="${blogPage.hasNext() ? '' : 'disabled'}"
+            >
+                <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} +1)}" th:text="Next"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <br><br>
+    <div class="footer">
+        <footer>
+            <p>Copyright © 2022 Dominykas<br>
+        </footer>
+    </div>
 </div>
 </body>
 </html>

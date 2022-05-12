@@ -6,6 +6,8 @@ import eu.codeacademy.blog.blog.mapper.BlogMapper;
 import eu.codeacademy.blog.blog.repository.BlogRepository;
 import eu.codeacademy.blog.utils.CurrentDate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,11 @@ public class BlogService {
                 .author(blogDto.getAuthor())
                 .status(blogDto.getStatus())
                 .build());
+    }
+
+    public Page<BlogDto> getBlogPaginated(Pageable pageable) {
+        return blogRepository.findAll(pageable)
+                .map(mapper::mapTo);
     }
 
     public List<BlogDto> getBlogs() {
