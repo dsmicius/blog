@@ -4,6 +4,7 @@ import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class BlogController {
     }
 
     @GetMapping("/list")
-    public String getBlogs(Model model, @PageableDefault(size = 2) Pageable pageable) {
+    public String getBlogs(Model model, @PageableDefault(size = 4, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
         return "blogs2";
     }
