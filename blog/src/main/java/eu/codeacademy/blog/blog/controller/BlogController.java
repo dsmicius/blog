@@ -33,7 +33,7 @@ public class BlogController {
     }
 
     @GetMapping("/list")
-    public String getBlogs(Model model, @PageableDefault(size = 4, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String getBlogs(Model model, @PageableDefault(size = 8, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
         return "blogs2";
     }
@@ -41,7 +41,7 @@ public class BlogController {
     @GetMapping("/{blogId}/update")
     public String getUpdateBlog(Model model, @PathVariable("blogId") UUID id) {
         model.addAttribute("blog",blogService.getBlogByUUID(id));
-        return "blog";
+        return "blog_update";
     }
 
     @PostMapping("/{blogId}/update")

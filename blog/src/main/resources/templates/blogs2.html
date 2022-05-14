@@ -10,126 +10,145 @@
     <link rel="stylesheet" href="/all.css">
     <title>List of Blogs 2</title>
 </head>
+
 <body>
 <div th:if="${#lists.isEmpty(blogPage)}">List is Empty</div>
 <div th:unless="${#lists.isEmpty(blogPage)}">
+    <div class="grid-container">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">My Blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">New Blog</a>
-                    <a class="nav-link" href="#">List Blogs</a>
-                    <a class="nav-link" href="#">Register</a>
-                    <a class="nav-link" href="#">Cart</a>
-                    <a class="nav-link justify-content-right" href="#">Languages</a>
+        <div class="menu-bar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">My Blog</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavAltMarkup"
+                            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" th:href="@{/blogs/}">New Blog</a>
+                            <a class="nav-link" th:href="@{/blogs/list/}">List Blogs</a>
+                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="#">Cart</a>
+                            <a class="nav-link justify-content-right" href="#">Languages</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </div>
-    </nav>
 
-    <br><br>
-
-    <div class="container">
-        <div class="filter">
-            <div class="filter-header">
-                <h4>FILTER</h4>
-            </div>
-            <div class="filter-content">
-                <p>
-                    <a th:with="direction=${blogPage.sort.getOrderFor('createDate')?.direction}"
-                       th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
-                        Created
-                        <i class="fa-solid"
-                           th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-9-1' : 'fa-arrow-up-1-9'}"
-                           th:if="${direction ne null}"></i>
-                    </a>
-                </p>
-                <p>
-                    <a th:with="direction=${blogPage.sort.getOrderFor('subject')?.direction}"
-                       th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
-                        Subject
-                        <i class="fa-solid"
-                           th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
-                           th:if="${direction ne null}"></i>
-                    </a>
-                </p>
-                <p>
-                    <a th:with="direction=${blogPage.sort.getOrderFor('author')?.direction}"
-                       th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
-                        Author
-                        <i class="fa-solid"
-                           th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
-                           th:if="${direction ne null}"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
         <div class="content">
-            <div th:each="blog: ${blogPage}">
-                <div class="box zoom">
-                    <div class="box-header">
-                        <div class="subj">
-                            <p><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                                  th:text="${blog.getSubject()}"></a></p>
-                        </div>
-                        <div class="create-date">
-                            <p th:text="${blog.getCreateDate()}"></p>
-                            <i th:text="${blog.getAuthor()}"></i>
-                        </div>
-                    </div>
-                    <br>
-                    <i th:text="${blog.getDescription()}"></i>
-                    <br>
-                    <div class="actions">
-                        <div class="edit">
-                            <i><a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                                  th:text="EDIT"></a></i>
-                        </div>
-                        <div class="delete">
-                            <i><a th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}"
-                                  th:text="DELETE"></a></i>
+            <div class="filter">
+                <div class="filter-header">
+                    <h4>FILTER</h4>
+                </div>
+                <div class="filter-content">
+                    <p>
+                        <a class="btn btn-light"
+                           th:with="direction=${blogPage.sort.getOrderFor('createDate')?.direction}"
+                           th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
+                            Created
+                            <i class="fa-solid"
+                               th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-9-1' : 'fa-arrow-up-1-9'}"
+                               th:if="${direction ne null}"></i>
+                        </a>
+                    </p>
+                    <p>
+                        <a class="btn btn-light"
+                           th:with=" direction=${blogPage.sort.getOrderFor('subject')?.direction}"
+                           th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
+                            Subject
+                            <i class="fa-solid"
+                               th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
+                               th:if="${direction ne null}"></i>
+                        </a>
+                    </p>
+                    <p>
+                        <a class="btn btn-light"
+                           th:with="direction=${blogPage.sort.getOrderFor('author')?.direction}"
+                           th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
+                            Author
+                            <i class="fa-solid"
+                               th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
+                               th:if="${direction ne null}"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="blog-cards">
+                <div th:each="blog: ${blogPage}">
+                    <div class="card text-dark bg-light mb-3 zoom"
+                         style="max-width: 18rem;max-height: 20rem;min-height: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
+                                   th:text="${blog.getSubject()}"
+                                >
+                                </a>
+                            </h5>
+                            <p class="card-text" th:text="${blog.getDescription()}"></p>
+                            <div class="buttons absolute">
+                                <a class="btn btn-primary"
+                                   th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
+                                   th:text="EDIT"
+                                ></a>
+                                <a class="btn btn-danger"
+                                   th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}"
+                                   th:text="DELETE"
+                                ></a>
+                            </div>
+                            <div class="card-bottom absolute">
+                                <div class="create-date" style="justify-self: start;">
+                                    <p th:text="${blog.getCreateDate()}"></p>
+                                </div>
+                                <div class="author" style="justify-self: end;">
+                                    <i th:text="${blog.getAuthor()}"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br>
-    <span class="d-flex justify-content-center" th:text="'Total elements: ' + ${blogPage.totalElements}"></span><br>
-    <!--    <span th:text="'Total pages: ' + ${blogPage.totalPages}"></span>-->
 
-    <nav class="d-flex justify-content-center">
-        <ul class="pagination">
-            <li class="page-item"
-                th:classappend="${blogPage.hasPrevious() ? '' : 'disabled'}"
-            >
-                <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} -1)}" th:text="Previous"></a>
-            </li>
-            <li class="page-item"
-                th:each="pageNumber: ${#numbers.sequence(0, blogPage.totalPages - 1)}"
-                th:classappend="${pageNumber == blogPage.number ? 'active' : ''}"
-            >
-                <a class="page-link" th:href="@{/blogs/list(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
-            </li>
-            <li class="page-item"
-                th:classappend="${blogPage.hasNext() ? '' : 'disabled'}"
-            >
-                <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} +1)}" th:text="Next"></a>
-            </li>
-        </ul>
-    </nav>
+        <div class="total-elements">
+            <p class="d-flex justify-content-center" th:text="'Total elements: ' + ${blogPage.totalElements}"></p>
+            <br>
+        </div>
 
-    <br><br>
-    <div class="footer">
-        <footer>
-            <p>Copyright © 2022 Dominykas<br>
-        </footer>
+        <div class="page-bar">
+            <nav class="pages d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item"
+                        th:classappend="${blogPage.hasPrevious() ? '' : 'disabled'}"
+                    >
+                        <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} -1)}"
+                           th:text="Previous"></a>
+                    </li>
+                    <li class="page-item"
+                        th:each="pageNumber: ${#numbers.sequence(0, blogPage.totalPages - 1)}"
+                        th:classappend="${pageNumber == blogPage.number ? 'active' : ''}"
+                    >
+                        <a class="page-link" th:href="@{/blogs/list(page=${pageNumber})}"
+                           th:text="${pageNumber + 1}"></a>
+                    </li>
+                    <li class="page-item"
+                        th:classappend="${blogPage.hasNext() ? '' : 'disabled'}"
+                    >
+                        <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} +1)}"
+                           th:text="Next"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="footer">
+            <footer>
+                <p>Copyright © 2022 Dominykas<br>
+            </footer>
+        </div>
+
     </div>
 </div>
 </body>
