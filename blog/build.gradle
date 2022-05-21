@@ -33,7 +33,7 @@ dependencies {
     implementation "com.h2database:h2:${h2Version}"
     implementation "org.postgresql:postgresql:${postgresVersion}"
     implementation "mysql:mysql-connector-java:${mysqlVersion}"
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
