@@ -12,8 +12,11 @@
     <script type="text/javascript" src="/js/language.js"></script>
     <title>List of Blogs 2</title>
 </head>
-
 <body>
+<div class="alert alert-success" th:if="${not message.isEmpty()}">
+    <span th:text="${message}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+
+</div>
 <div th:if="${not blogPage.hasContent()}">List is Empty</div>
 <div th:if="${blogPage.hasContent()}">
     <div class="grid-container">
@@ -33,9 +36,7 @@
                                 <a class="nav-link" th:href="@{/blogs/list/}" th:text="#{nav.list}"></a>
                                 <a class="nav-link" href="#" th:text="#{nav.register}"></a>
                                 <a class="nav-link" href="#" th:text="#{nav.favorites}"></a>
-                                <a class="nav-link justify-content-right" href="#" th:text="#{nav.language}"></a>
-
-                                <select id="languageSelector">
+                                <select class="nav-item dropdown" id="languageSelector">
                                     <option value="" th:text="#{lang.option}"></option>
                                     <option value="LT" th:text="Lietuvių"></option>
                                     <option value="US" th:text="English"></option>
@@ -51,7 +52,6 @@
                 </div>
             </nav>
         </div>
-
         <div class="content">
             <div class="filter">
                 <div class="filter-header">

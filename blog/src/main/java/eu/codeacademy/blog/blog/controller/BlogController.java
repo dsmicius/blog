@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.blog.controller;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
+import eu.codeacademy.blog.blog.helper.MessageService;
 import eu.codeacademy.blog.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @RequestMapping("/blogs")
 public class BlogController {
     private final BlogService blogService;
+    private final MessageService messageService;
 
     @GetMapping
     public String openCreateBlogForm(Model model) {
@@ -28,13 +30,13 @@ public class BlogController {
     public String createBlog(Model model, BlogDto blog) {
         blogService.addBlog(blog);
         model.addAttribute("blog", BlogDto.builder().build());
-        model.addAttribute("message","Blog entry " + blog.getSubject() + " added success");
-        return "redirect:/blogs/list";
+        return "redirect:/blogs/list?message=create.blog.message.success";
     }
 
     @GetMapping("/list")
-    public String getBlogs(Model model, @PageableDefault(size = 8, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String getBlogs(Model model, @PageableDefault(size = 8, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable, String message) {
         model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
+        model.addAttribute("message",messageService.getMessage(message));
         return "blogs2";
     }
 
