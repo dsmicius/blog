@@ -2,6 +2,7 @@ package eu.codeacademy.blog.blog.service;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.entity.Blog;
+import eu.codeacademy.blog.blog.exception.BlogNotFoundException;
 import eu.codeacademy.blog.blog.mapper.BlogMapper;
 import eu.codeacademy.blog.blog.repository.BlogRepository;
 import eu.codeacademy.blog.utils.CurrentDate;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -48,26 +50,35 @@ public class BlogService {
     }
 
     public BlogDto getBlogByUUID(UUID id) {
-
-        return mapper.mapTo(blogRepository.findByBlogId(id));
+        Optional<Blog> blog = blogRepository.findByBlogId(id);
+        if (blog.isPresent()) {
+            return mapper.mapTo(blog.get());
+        }
+        throw new BlogNotFoundException();
     }
 
     @Transactional
     public void updateBlog(BlogDto blogDto) {
-        Blog blog = blogRepository.findByBlogId(blogDto.getBlogId()).toBuilder()
-                .subject(blogDto.getSubject())
-                .description(blogDto.getDescription())
-                .createDate(currentDate.getCurrentDate())
-                .updateDate(blogDto.getUpdateDate())
-                .deleteDate(blogDto.getDeleteDate())
-                .author(blogDto.getAuthor())
-                .status(blogDto.getStatus())
-                .build();
-        blogRepository.save(blog);
+        Optional<Blog> blogOptional = blogRepository.findByBlogId(blogDto.getBlogId());
+        if (blogOptional.isPresent()) {
+            Blog blog = blogOptional.get().toBuilder()
+                    .subject(blogDto.getSubject())
+                    .description(blogDto.getDescription())
+                    .createDate(currentDate.getCurrentDate())
+                    .updateDate(blogDto.getUpdateDate())
+                    .deleteDate(blogDto.getDeleteDate())
+                    .author(blogDto.getAuthor())
+                    .status(blogDto.getStatus())
+                    .build();
+            blogRepository.save(blog);
+        }
     }
 
     @Transactional
     public void deleteBlog(UUID id) {
-        blogRepository.deleteById(blogRepository.findByBlogId(id).getId());
+        Optional<Blog> blog = blogRepository.findByBlogId(id);
+        if (blog.isPresent()) {
+            blogRepository.deleteById(blog.get().getId());
+        }
     }
 }
