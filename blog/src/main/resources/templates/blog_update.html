@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Create Blog</title>
+    <title th:text="#{update.blog}"></title>
 </head>
 <body>
-<h3>Create Blog:</h3>
-<form action="" method="post" th:object="${blog}">
-    <div class="form-floating">
+<div class="blog-update container">
+    <h3 th:text="#{update.blog}"></h3>
+    <form action="" method="post" th:object="${blog}">
+        <div class="form-floating">
         <textarea
                 class="form-control"
                 type="text"
@@ -21,11 +22,11 @@
                 th:field="*{subject}"
                 style="height: 50%; width: 50%"
         ></textarea>
-        <label for="floatingSubjectarea">Subject</label>
-        <br>
-        <br>
-    </div>
-    <div class="form-floating">
+            <label for="floatingSubjectarea" th:text="#{update.subject}"></label>
+            <br>
+            <br>
+        </div>
+        <div class="form-floating">
         <textarea
                 class="form-control"
                 type="text"
@@ -36,15 +37,15 @@
                 th:field="*{description}"
                 style="height: 50%; width: 50%"
         ></textarea>
-        <label for="floatingTextarea">Description</label>
-    </div>
-    </div>
-    <br>
-    <br>
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a th:href="@{/blogs/list}" class="btn btn-primary">Back</a>
-    <br><br>
-    <div th:text="${message}"></div>
-</form>
+            <label for="floatingTextarea" th:text="#{update.description}"></label>
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary" th:text="#{update.update-button}"></button>
+        <a th:href="@{/blogs/list}" class="btn btn-primary" th:text="#{update.back-button}"></a>
+        <br><br>
+        <div th:text="${message}"></div>
+    </form>
+</div>
 </body>
 </html>

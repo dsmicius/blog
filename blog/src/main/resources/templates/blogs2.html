@@ -12,14 +12,14 @@
 </head>
 
 <body>
-<div th:if="${#lists.isEmpty(blogPage)}">List is Empty</div>
-<div th:unless="${#lists.isEmpty(blogPage)}">
+<div th:if="${not blogPage.hasContent()}">List is Empty</div>
+<div th:if="${blogPage.hasContent()}">
     <div class="grid-container">
 
         <div class="menu-bar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">My Blog</a>
+                    <a class="navbar-brand" th:href="@{/blogs/list/}" th:text="#{nav.home}"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup"
                             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,11 +27,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-link active" th:href="@{/blogs/}">New Blog</a>
-                            <a class="nav-link" th:href="@{/blogs/list/}">List Blogs</a>
-                            <a class="nav-link" href="#">Register</a>
-                            <a class="nav-link" href="#">Cart</a>
-                            <a class="nav-link justify-content-right" href="#">Languages</a>
+                            <a class="nav-link active" th:href="@{/blogs/}" th:text="#{nav.create.blog}"></a>
+                            <a class="nav-link" th:href="@{/blogs/list/}" th:text="#{nav.list}"></a>
+                            <a class="nav-link" href="#" th:text="#{nav.register}"></a>
+                            <a class="nav-link" href="#" th:text="#{nav.favorites}"></a>
+                            <a class="nav-link justify-content-right" href="#" th:text="#{nav.language}"></a>
                         </div>
                     </div>
                 </div>
@@ -41,14 +41,14 @@
         <div class="content">
             <div class="filter">
                 <div class="filter-header">
-                    <h4>FILTER</h4>
+                    <h4 th:text="#{filter.header}"></h4>
                 </div>
                 <div class="filter-content">
                     <p>
                         <a class="btn btn-light"
                            th:with="direction=${blogPage.sort.getOrderFor('createDate')?.direction}"
-                           th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
-                            Created
+                           th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}"
+                           th:text="#{filter.created}">
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-9-1' : 'fa-arrow-up-1-9'}"
                                th:if="${direction ne null}"></i>
@@ -57,8 +57,8 @@
                     <p>
                         <a class="btn btn-light"
                            th:with=" direction=${blogPage.sort.getOrderFor('subject')?.direction}"
-                           th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
-                            Subject
+                           th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}"
+                           th:text="#{filter.subject}">
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
                                th:if="${direction ne null}"></i>
@@ -67,8 +67,8 @@
                     <p>
                         <a class="btn btn-light"
                            th:with="direction=${blogPage.sort.getOrderFor('author')?.direction}"
-                           th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
-                            Author
+                           th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}"
+                           th:text="#{filter.author}">
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
                                th:if="${direction ne null}"></i>
@@ -94,11 +94,11 @@
                             <div class="buttons absolute">
                                 <a class="btn btn-primary"
                                    th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                                   th:text="EDIT"
+                                   th:text="#{blogs.edit-button}"
                                 ></a>
                                 <a class="btn btn-danger"
                                    th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}"
-                                   th:text="DELETE"
+                                   th:text="#{blogs.delete-button}"
                                 ></a>
                             </div>
                             <div class="card-bottom absolute">

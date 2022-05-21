@@ -29,7 +29,7 @@ public class BlogController {
         blogService.addBlog(blog);
         model.addAttribute("blog", BlogDto.builder().build());
         model.addAttribute("message","Blog entry " + blog.getSubject() + " added success");
-        return "blog";
+        return "redirect:/blogs/list";
     }
 
     @GetMapping("/list")
@@ -47,14 +47,12 @@ public class BlogController {
     @PostMapping("/{blogId}/update")
     public String updateBlog(Model model, BlogDto blog) {
         blogService.updateBlog(blog);
-        model.addAttribute("blogList", blogService.getBlogs());
-        return "blogs2";
+        return "redirect:/blogs/list";
     }
 
     @GetMapping("/{blogId}/delete")
     public String deleteBlog(Model model, @PathVariable("blogId") UUID id) {
         blogService.deleteBlog(id);
-        model.addAttribute("blogList",blogService.getBlogs());
-        return "blogs2";
+        return "redirect:/blogs/list";
     }
 }

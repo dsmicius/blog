@@ -50,11 +50,9 @@ public class BlogService {
     }
 
     public BlogDto getBlogByUUID(UUID id) {
-        Optional<Blog> blog = blogRepository.findByBlogId(id);
-        if (blog.isPresent()) {
-            return mapper.mapTo(blog.get());
-        }
-        throw new BlogNotFoundException();
+        return blogRepository.findByBlogId(id)
+                .map(mapper::mapTo)
+                .orElseThrow(BlogNotFoundException::new);
     }
 
     @Transactional
