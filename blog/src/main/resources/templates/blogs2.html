@@ -61,8 +61,8 @@
                     <p>
                         <a class="btn btn-light"
                            th:with="direction=${blogPage.sort.getOrderFor('createDate')?.direction}"
-                           th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}"
-                           th:text="#{filter.created}">
+                           th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
+                            <span th:text="#{filter.created}"></span>
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-9-1' : 'fa-arrow-up-1-9'}"
                                th:if="${direction ne null}"></i>
@@ -71,8 +71,8 @@
                     <p>
                         <a class="btn btn-light"
                            th:with=" direction=${blogPage.sort.getOrderFor('subject')?.direction}"
-                           th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}"
-                           th:text="#{filter.subject}">
+                           th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
+                            <span th:text="#{filter.subject}"></span>
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
                                th:if="${direction ne null}"></i>
@@ -81,8 +81,8 @@
                     <p>
                         <a class="btn btn-light"
                            th:with="direction=${blogPage.sort.getOrderFor('author')?.direction}"
-                           th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}"
-                           th:text="#{filter.author}">
+                           th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
+                            <span th:text="#{filter.author}"></span>
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
                                th:if="${direction ne null}"></i>
@@ -136,24 +136,29 @@
 
         <div class="page-bar">
             <nav class="pages d-flex justify-content-center">
-                <ul class="pagination">
+                <ul class="pagination"
+                    th:with="
+                    orderParam=${blogPage.sort.iterator().hasNext() ? blogPage.sort.iterator().next : null},
+                    sortParam=${orderParam.property + ',' + orderParam.direction + ',ignorecase'}">
                     <li class="page-item"
-                        th:classappend="${blogPage.hasPrevious() ? '' : 'disabled'}"
-                    >
-                        <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} -1)}"
+                        th:classappend="${blogPage.hasPrevious() ? '' : 'disabled'}">
+                        <a class="page-link"
+                           th:href="@{/blogs/list(page=${blogPage.number} - 1,sort=${sortParam})}"
                            th:text="Previous"></a>
                     </li>
+
                     <li class="page-item"
                         th:each="pageNumber: ${#numbers.sequence(0, blogPage.totalPages - 1)}"
-                        th:classappend="${pageNumber == blogPage.number ? 'active' : ''}"
-                    >
-                        <a class="page-link" th:href="@{/blogs/list(page=${pageNumber})}"
+                        th:classappend="${pageNumber == blogPage.number ? 'active' : ''}">
+                        <a class="page-link"
+                           th:href="@{/blogs/list(page=${pageNumber},sort=${sortParam})}"
                            th:text="${pageNumber + 1}"></a>
                     </li>
+
                     <li class="page-item"
-                        th:classappend="${blogPage.hasNext() ? '' : 'disabled'}"
-                    >
-                        <a class="page-link" th:href="@{/blogs/list(page=${blogPage.getNumber()} +1)}"
+                        th:classappend="${blogPage.hasNext() ? '' : 'disabled'}">
+                        <a class="page-link"
+                           th:href="@{/blogs/list(page=${blogPage.number} + 1,sort=${sortParam})}"
                            th:text="Next"></a>
                     </li>
                 </ul>

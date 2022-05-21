@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  postgresqldb:
+    image: postgres
+    mem_limit: 1536MB
+    mem_reservation: 1G
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5433"
+    networks:
+      - postgres_network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  pgadmin4:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: tests@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "8889:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - postgres_network
+volumes:
+  db-data:
+  pgadmin-data:
+
+networks:
+  postgres_network:
+    driver: bridge
