@@ -1,15 +1,13 @@
 package eu.codeacademy.blog.blog.entity;
 
+import eu.codeacademy.blog.comment.model.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -31,5 +29,7 @@ public class Blog {
     private String deleteDate;
     private String author;
     private String status;
+    @OneToMany(mappedBy = "blog")
+    Set<Comment> comments;
 
 }

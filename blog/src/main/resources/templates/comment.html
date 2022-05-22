@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       <title th:text="#{comment.create}"></title>
+</head>
+<body>
+<div class="blog-update container">
+    <h3 th:text="#{comment.create}"></h3>
+    <form action="" method="post" th:object="${comment}">
+        <div class="form-floating">
+        <textarea
+                class="form-control"
+                type="text"
+                placeholder="please enter description of Blog entry"
+                rows="20"
+                cols="60"
+                id="floatingTextarea"
+                th:field="*{text}"
+                style="height: 50%; width: 50%"
+        ></textarea>
+            <label for="floatingTextarea" th:text="#{comment.description}"></label>
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary" th:text="#{comment.create-button}"></button>
+        <a th:href="@{/blogs/list}" class="btn btn-primary" th:text="#{comment.back-button}"></a>
+    </form>
+</div>
+</body>
+</html>

@@ -126,3 +126,30 @@ VALUES
      '1999-01-01 00:00',
      'Zilvinas',
      'Active');
+
+INSERT INTO COMMENT (comment_id, text, create_date, update_date, delete_date, author, blog_id)
+values
+('8bf0860a-59ba-446b-86dc-92d58a4e1ec3',
+ 'cia yra mano komentaras3333',
+ '2022-02-15 18:00',
+ '1999-01-01 00:00',
+ '1999-01-01 00:00',
+ 'domas',
+ 3
+),
+('8bf0860a-59ba-446b-86dc-92d58a4e1ec2',
+ 'cia yra mano komentaras2222',
+ '2022-02-15 18:00',
+ '1999-01-01 00:00',
+ '1999-01-01 00:00',
+ 'Vytas',
+ 2
+),
+('8bf0860a-59ba-446b-86dc-92d58a4e1ec1',
+ 'cia yra mano komentaras1111',
+ '2022-02-15 18:00',
+ '1999-01-01 00:00',
+ '1999-01-01 00:00',
+ 'Tomas',
+ 3
+);
