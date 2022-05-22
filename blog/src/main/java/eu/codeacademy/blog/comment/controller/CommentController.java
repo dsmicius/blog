@@ -23,8 +23,10 @@ public class CommentController {
     private final CommentService commentService;
 
     @GetMapping("/{blogId}/comment")
-    public String openCommentForm(Model model) {
+    public String openCommentForm(Model model, @PathVariable("blogId") UUID id) {
+        Blog blog = blogService.getBlogByBlogId(id);
         model.addAttribute("comment", CommentDto.builder().build());
+        model.addAttribute("blog",blog);
         return "comment";
     }
 

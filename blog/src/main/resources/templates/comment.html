@@ -10,6 +10,7 @@
 <body>
 <div class="blog-update container">
     <h3 th:text="#{comment.create}"></h3>
+    <i th:text="${blog.getSubject()}"></i>
     <form action="" method="post" th:object="${comment}">
         <div class="form-floating">
         <textarea
