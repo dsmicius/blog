@@ -79,4 +79,9 @@ public class BlogService {
             blogRepository.deleteById(blog.get().getId());
         }
     }
+
+    public Blog getBlogByBlogId(UUID id) {
+        Optional<Blog> blog = blogRepository.findByBlogId(id);
+        return blog.get();
+    }
 }

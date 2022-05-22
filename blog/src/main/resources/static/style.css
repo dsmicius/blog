@@ -60,7 +60,7 @@
 
 .card-bottom {
     display: grid;
-    grid-template-columns: 10em 15em;
+    grid-template-columns: 10em 4em 10em;
     font-size: 10px;
 }
 
@@ -78,4 +78,9 @@ div.absolute.card-bottom {
 
 .alert {
     cursor: pointer;
+}
+
+.favorite {
+    color: red;
+    font-size: 3em;
 }

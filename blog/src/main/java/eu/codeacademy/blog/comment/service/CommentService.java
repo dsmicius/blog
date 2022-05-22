@@ -1,5 +1,6 @@
 package eu.codeacademy.blog.comment.service;
 
+import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.comment.dto.CommentDto;
 import eu.codeacademy.blog.comment.entity.Comment;
 import eu.codeacademy.blog.comment.mapper.CommentMapper;
@@ -20,7 +21,7 @@ public class CommentService {
     private final CommentMapper commentMapper;
     private final CurrentDate currentDate;
 
-    public void addComment(CommentDto commentDto) {
+    public void addComment(CommentDto commentDto, Blog blog) {
         commentRepository.save(Comment.builder()
                 .commentId(UUID.randomUUID())
                 .text(commentDto.getText())
@@ -28,7 +29,7 @@ public class CommentService {
                 .updateDate(commentDto.getUpdateDate())
                 .deleteDate(commentDto.getDeleteDate())
                 .author(commentDto.getAuthor())
-                .blog(commentDto.getBlog())
+                .blog(blog)
                 .build());
     }
 
