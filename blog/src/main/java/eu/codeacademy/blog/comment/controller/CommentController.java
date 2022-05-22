@@ -22,7 +22,7 @@ public class CommentController {
     private final BlogService blogService;
     private final CommentService commentService;
 
-    @GetMapping
+    @GetMapping("/{blogId}/comment")
     public String openCommentForm(Model model) {
         model.addAttribute("comment", CommentDto.builder().build());
         return "comment";
@@ -33,6 +33,6 @@ public class CommentController {
         Blog blog = blogService.getBlogByBlogId(id);
         commentService.addComment(commentDto, blog);
         model.addAttribute("comment", CommentDto.builder().build());
-        return "comment";
+        return "redirect:/blogs/list?message=create.comment.message.success";
     }
 }
