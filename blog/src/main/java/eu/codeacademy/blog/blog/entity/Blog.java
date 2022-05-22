@@ -1,6 +1,6 @@
 package eu.codeacademy.blog.blog.entity;
 
-import eu.codeacademy.blog.comment.model.Comment;
+import eu.codeacademy.blog.comment.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

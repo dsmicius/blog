@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.comment.model;
+package eu.codeacademy.blog.comment.entity;
 
 import eu.codeacademy.blog.blog.entity.Blog;
 import lombok.AllArgsConstructor;

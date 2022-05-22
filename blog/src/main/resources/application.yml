@@ -8,8 +8,8 @@ spring:
     password: password
   sql:
     init:
-      schema-locations: classpath:db/db-schema.sql
-      data-locations: classpath:db/initial-data.sql
+#      schema-locations: classpath:db/db-schema.sql
+#      data-locations: classpath:db/initial-data.sql
   h2:
     console:
       enabled: true
