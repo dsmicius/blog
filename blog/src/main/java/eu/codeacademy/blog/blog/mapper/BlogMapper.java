@@ -17,6 +17,7 @@ public class BlogMapper {
                 .deleteDate(blog.getDeleteDate())
                 .author(blog.getAuthor())
                 .status(blog.getStatus())
+                .comments(blog.getComments())
                 .build();
     }
 }
