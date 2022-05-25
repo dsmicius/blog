@@ -1,8 +1,10 @@
 package eu.codeacademy.blog.blog.dto;
 
+import eu.codeacademy.blog.comment.entity.Comment;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -16,4 +18,5 @@ public class BlogDto {
     private String deleteDate;
     private String author;
     private String status;
+    private Set<Comment> comments;
 }
