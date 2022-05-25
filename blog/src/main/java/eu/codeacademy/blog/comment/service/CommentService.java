@@ -38,4 +38,11 @@ public class CommentService {
                 .map(commentMapper::mapTo)
                 .collect(Collectors.toList());
     }
+
+    public List<CommentDto> getBlogComments(Blog blog) {
+        return commentRepository.findAll().stream()
+                .filter(c -> c.getBlog().equals(blog))
+                .map(commentMapper::mapTo)
+                .collect(Collectors.toList());
+    }
 }
