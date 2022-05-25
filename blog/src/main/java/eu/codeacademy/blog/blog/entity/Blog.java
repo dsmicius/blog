@@ -29,7 +29,7 @@ public class Blog {
     private String deleteDate;
     private String author;
     private String status;
-    @OneToMany(mappedBy = "blog")
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
     Set<Comment> comments;
 
 }
