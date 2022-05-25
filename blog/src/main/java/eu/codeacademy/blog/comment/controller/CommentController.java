@@ -37,4 +37,18 @@ public class CommentController {
         model.addAttribute("comment", CommentDto.builder().build());
         return "redirect:/blogs/list?message=create.comment.message.success";
     }
+
+    @GetMapping("/list")
+    public String getComments(Model model) {
+        model.addAttribute("comments",commentService.getComments());
+        return "comments";
+    }
+
+    @GetMapping("/{blogId}/list")
+    public String getComments(Model model, @PathVariable("blogId") UUID id) {
+        Blog blog = blogService.getBlogByBlogId(id);
+        model.addAttribute("comments",commentService.getBlogComments(blog));
+        return "comments";
+    }
+
 }

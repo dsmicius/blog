@@ -24,5 +24,5 @@ CREATE TABLE COMMENT
     update_date VARCHAR(25) DEFAULT NULL,
     delete_date VARCHAR(25) DEFAULT NULL,
     author      VARCHAR(50) DEFAULT NULL,
-    blog_id BIGINT NOT NULL
+    blog_id     BIGINT NOT NULL
 );

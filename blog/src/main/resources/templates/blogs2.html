@@ -96,7 +96,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a th:with="subject=${blog.getSubject()}"
-                                   th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
+                                   th:href="@{/blogs/{blogId}/view(blogId=${blog.getBlogId()})}"
                                    th:text="${blog.getSubject().length() > 40} ? ${subject.substring(0, 40)} + ' ...' : ${subject}"
                                 >
                                 </a>
@@ -120,8 +120,8 @@
                                     <div class="create-date" style="justify-self: start;">
                                         <i th:text="${blog.getAuthor()}"></i>
                                         <p th:text="${blog.getCreateDate()}"></p>
-<!--                                    </div>-->
-<!--                                    <div class="author" style="justify-self: end;">-->
+                                        <!--                                    </div>-->
+                                        <!--                                    <div class="author" style="justify-self: end;">-->
 
                                     </div>
                                 </div>
@@ -129,6 +129,8 @@
                                     <i class="favorite fa-solid fa-heart"></i>
                                 </div>
                                 <div class="right-side">
+                                    <i th:text="'Comments: ' + ${blog.getComments().size()}"></i>
+                                    <br>
                                     <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}">add comment</a>
                                 </div>
                             </div>

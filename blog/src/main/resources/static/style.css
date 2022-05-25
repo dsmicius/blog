@@ -43,7 +43,7 @@
 
 .zoom {
     transition: transform 0.5s;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .zoom:hover {

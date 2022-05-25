@@ -1,8 +1,10 @@
 package eu.codeacademy.blog.blog.controller;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
+import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.blog.helper.MessageService;
 import eu.codeacademy.blog.blog.service.BlogService;
+import eu.codeacademy.blog.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,6 +21,7 @@ import java.util.UUID;
 public class BlogController {
     private final BlogService blogService;
     private final MessageService messageService;
+    private final CommentService commentService;
 
     @GetMapping
     public String openCreateBlogForm(Model model) {
@@ -44,6 +47,14 @@ public class BlogController {
     public String getUpdateBlog(Model model, @PathVariable("blogId") UUID id) {
         model.addAttribute("blog",blogService.getBlogByUUID(id));
         return "blog_update";
+    }
+
+    @GetMapping("/{blogId}/view")
+    public String getViewBlog(Model model, @PathVariable("blogId") UUID id) {
+        Blog blog = blogService.getBlogByBlogId(id);
+        model.addAttribute("blog",blogService.getBlogByUUID(id));
+        model.addAttribute("comments",commentService.getBlogComments(blog));
+        return "blog_view";
     }
 
     @PostMapping("/{blogId}/update")
