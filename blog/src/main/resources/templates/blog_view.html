@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>View blog</title>
+    <title th:text="#{view.blog}"></title>
 </head>
 <body>
 <div class="blog-view container">
@@ -17,18 +17,19 @@
         <p th:text="${blog.getDescription()}"></p>
     </div>
     <br>
-    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}">add comment</a>
+    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}"
+       th:text="#{comment.add}"></a>
     <br>
     <br>
-    <i>Comments</i>
+    <i th:text="#{comment.comments}"></i>
     <div th:object="${comments}">
         <table class="table table-light">
             <thead>
             <tr>
-                <th>No.</th>
-                <th>Created</th>
-                <th>Created by</th>
-                <th>Text</th>
+                <th th:text="#{comments.table.no}"></th>
+                <th th:text="#{comments.table.created}"></th>
+                <th th:text="#{comments.table.author}"></th>
+                <th th:text="#{comments.table.commentText}"></th>
             </tr>
             </thead>
             <tbody>
@@ -44,7 +45,7 @@
     <br>
     <br>
 
-    <a th:href="@{/blogs/list}" class="btn btn-primary" th:text="Back"></a>
+    <a th:href="@{/blogs/list}" class="btn btn-primary" th:text="#{view.back-button}"></a>
 
 </div>
 </body>

@@ -129,9 +129,10 @@
                                     <i class="favorite fa-solid fa-heart"></i>
                                 </div>
                                 <div class="right-side">
-                                    <i th:text="'Comments: ' + ${blog.getComments().size()}"></i>
+                                    <i th:text="#{comments.totalComments} + ': ' + ${blog.getComments().size()}"></i>
                                     <br>
-                                    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}">add comment</a>
+                                    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}"
+                                       th:text="#{comment.add}"></a>
                                 </div>
                             </div>
                         </div>
