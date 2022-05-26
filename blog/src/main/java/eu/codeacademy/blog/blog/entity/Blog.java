@@ -12,7 +12,6 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Blog {
 
     @Id
@@ -27,7 +26,7 @@ public class Blog {
     private String deleteDate;
     private String author;
     private String status;
-    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
     Set<Comment> comments;
 
 }
