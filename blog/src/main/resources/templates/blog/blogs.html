@@ -124,9 +124,12 @@
                                     </div>
                                 </div>
                                 <div class="center">
-                                    <button class="btn btn-light">
-                                        <i class="fa-solid fa-thumbs-up"></i>
-                                    </button>
+                                    <form method="POST"
+                                          th:action="@{/favorite/{blogId}(blogId=${blog.getBlogId()})}">
+                                        <button class="btn btn-success">
+                                            <i class="fa-solid fa-thumbs-up"></i>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div class="right-side">
                                     <i th:text="#{comments.totalComments} + ': ' + ${blog.getComments().size()}"></i>
@@ -176,7 +179,8 @@
                 </ul>
             </nav>
         </div>
-
+        <br>
+        <hr>
         <div class="footer">
             <footer>
                 <p>Copyright © 2022 Dominykas<br>
