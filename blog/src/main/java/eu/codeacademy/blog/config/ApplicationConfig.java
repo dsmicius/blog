@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.blog.config;
+package eu.codeacademy.blog.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/language.js"></script>
-    <title>List of Blogs 2</title>
+    <title>List of Blogs</title>
 </head>
 <body>
 <div class="alert alert-success" th:if="${not message.isEmpty()}">
@@ -34,7 +34,7 @@
                                 <a class="nav-link active" th:href="@{/blogs/}" th:text="#{nav.create.blog}"></a>
                                 <a class="nav-link" th:href="@{/blogs/list/}" th:text="#{nav.list}"></a>
                                 <a class="nav-link" href="#" th:text="#{nav.register}"></a>
-                                <a class="nav-link" href="#" th:text="#{nav.favorites}"></a>
+                                <a class="nav-link" th:href="@{/favorite}" th:text="#{nav.favorites}"></a>
                                 <select class="nav-item dropdown" id="languageSelector">
                                     <option value="" th:text="#{lang.option}"></option>
                                     <option value="LT" th:text="Lietuvių"></option>
@@ -124,7 +124,9 @@
                                     </div>
                                 </div>
                                 <div class="center">
-                                    <i class="favorite fa-solid fa-heart"></i>
+                                    <button class="btn btn-light">
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    </button>
                                 </div>
                                 <div class="right-side">
                                     <i th:text="#{comments.totalComments} + ': ' + ${blog.getComments().size()}"></i>

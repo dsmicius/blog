@@ -80,7 +80,6 @@ div.absolute.card-bottom {
     cursor: pointer;
 }
 
-.favorite {
-    color: red;
-    font-size: 3em;
+button {
+    border: none;
 }

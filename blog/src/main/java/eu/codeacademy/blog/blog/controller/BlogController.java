@@ -26,7 +26,7 @@ public class BlogController {
     @GetMapping
     public String openCreateBlogForm(Model model) {
         model.addAttribute("blog", BlogDto.builder().build());
-        return "blog";
+        return "blog/blog";
     }
 
     @PostMapping
@@ -40,13 +40,13 @@ public class BlogController {
     public String getBlogs(Model model, @PageableDefault(size = 8, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable, String message) {
         model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
         model.addAttribute("message",messageService.getMessage(message));
-        return "blogs2";
+        return "blog/blogs";
     }
 
     @GetMapping("/{blogId}/update")
     public String getUpdateBlog(Model model, @PathVariable("blogId") UUID id) {
         model.addAttribute("blog",blogService.getBlogByUUID(id));
-        return "blog_update";
+        return "blog/blog_update";
     }
 
     @GetMapping("/{blogId}/view")
@@ -54,7 +54,7 @@ public class BlogController {
         Blog blog = blogService.getBlogByBlogId(id);
         model.addAttribute("blog",blogService.getBlogByUUID(id));
         model.addAttribute("comments",commentService.getBlogComments(blog));
-        return "blog_view";
+        return "blog/blog_view";
     }
 
     @PostMapping("/{blogId}/update")

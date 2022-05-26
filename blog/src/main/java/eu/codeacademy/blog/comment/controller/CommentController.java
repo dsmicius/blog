@@ -27,7 +27,7 @@ public class CommentController {
         Blog blog = blogService.getBlogByBlogId(id);
         model.addAttribute("comment", CommentDto.builder().build());
         model.addAttribute("blog",blog);
-        return "comment";
+        return "comment/comment";
     }
 
     @PostMapping("/{blogId}/comment")
@@ -41,14 +41,14 @@ public class CommentController {
     @GetMapping("/list")
     public String getComments(Model model) {
         model.addAttribute("comments",commentService.getComments());
-        return "comments";
+        return "comment/comments";
     }
 
     @GetMapping("/{blogId}/list")
     public String getComments(Model model, @PathVariable("blogId") UUID id) {
         Blog blog = blogService.getBlogByBlogId(id);
         model.addAttribute("comments",commentService.getBlogComments(blog));
-        return "comments";
+        return "comment/comments";
     }
 
 }
