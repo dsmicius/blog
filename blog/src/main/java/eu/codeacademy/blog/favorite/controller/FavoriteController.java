@@ -4,7 +4,6 @@ import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.favorite.dto.FavoriteDto;
 import eu.codeacademy.blog.favorite.dto.FavoriteItem;
-import eu.codeacademy.blog.favorite.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ import java.util.UUID;
 public class FavoriteController {
 
     private final BlogService blogService;
-    private final FavoriteService favoriteService;
 
     @ModelAttribute("favoriteSession")
     public FavoriteDto createCart() {
@@ -43,7 +41,6 @@ public class FavoriteController {
 
     private void addBlogToFavorite(UUID blogId, FavoriteDto favorite) {
         BlogDto blogDto = blogService.getBlogByUUID(blogId);
-//        FavoriteDto favoriteDto = favoriteService.getFavoriteDto(blogDto);
         favorite.add(blogDto);
     }
 
