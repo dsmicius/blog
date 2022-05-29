@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="alert alert-success" th:if="${messageSuccess ne null}" th:text="#{${messageSuccess}}">
-<!--    <span th:text="#{${message}}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
+    <!--    <span th:text="#{${message}}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
 </div>
 <div th:if="${not blogPage.hasContent()}">List is Empty</div>
 <div th:if="${blogPage.hasContent()}">
@@ -105,15 +105,17 @@
                                th:with="description=${blog.getDescription()}"
                                th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}"></p>
                             <div class="buttons absolute">
-                                <a class="btn btn-primary"
-                                   th:href="@{/blogs/{blogId}/update(blogId=${blog.getBlogId()})}"
-                                   th:text="#{blogs.edit-button}"
-                                ></a>
-                                <a class="btn btn-danger"
-                                   th:href="@{/blogs/{blogId}/delete(blogId=${blog.getBlogId()})}"
-                                   th:text="#{blogs.delete-button}"
-                                   th:onclick="return confirm('Are you sure you want to delete this item?')"
-                                ></a>
+                                <form method="GET" th:action="@{/blogs/update}">
+                                    <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
+                                    <button class="btn btn-primary" th:text="#{blogs.edit-button}">
+                                    </button>
+                                </form>
+
+                                <form method="POST" th:action="@{/blogs/delete}">
+                                    <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
+                                    <button class="btn btn-danger" th:text="#{blogs.delete-button}">
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="card-bottom absolute">

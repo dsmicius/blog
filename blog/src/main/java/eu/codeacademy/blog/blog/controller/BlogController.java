@@ -41,35 +41,36 @@ public class BlogController {
     @GetMapping("/list")
     public String getBlogs(Model model, @PageableDefault(size = 8, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable, String message) {
         model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
-        model.addAttribute("message",messageService.getMessage(message));
+        model.addAttribute("message", messageService.getMessage(message));
         return "blog/blogs";
     }
 
-    @GetMapping("/{blogId}/update")
-    public String getUpdateBlog(Model model, @PathVariable("blogId") UUID id) {
-        model.addAttribute("blog",blogService.getBlogByUUID(id));
+    @GetMapping("/update")
+    public String getUpdateBlog(Model model, @RequestParam UUID blogId) {
+        model.addAttribute("blog", blogService.getBlogByUUID(blogId));
         return "blog/blog_update";
     }
 
     @GetMapping("/{blogId}/view")
     public String getViewBlog(Model model, @PathVariable("blogId") UUID id) {
         Blog blog = blogService.getBlogByBlogId(id);
-        model.addAttribute("blog",blogService.getBlogByUUID(id));
-        model.addAttribute("comments",commentService.getBlogComments(blog));
+        model.addAttribute("blog", blogService.getBlogByUUID(id));
+        model.addAttribute("comments", commentService.getBlogComments(blog));
         return "blog/blog_view";
     }
 
-    @PostMapping("/{blogId}/update")
-    public String updateBlog(Model model, BlogDto blog, RedirectAttributes redirectAttributes) {
+    @PostMapping("/update")
+    public String updateBlog(BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.updateBlog(blog);
         redirectAttributes.addFlashAttribute("messageSuccess", "update.blog.message.success");
         return "redirect:/blogs/list";
     }
 
-    @GetMapping("/{blogId}/delete")
-    public String deleteBlog(Model model, @PathVariable("blogId") UUID id, RedirectAttributes redirectAttributes) {
-        blogService.deleteBlog(id);
+    @PostMapping("/delete")
+    public String deleteBlog(@RequestParam UUID blogId, RedirectAttributes redirectAttributes) {
+        blogService.deleteBlog(blogId);
         redirectAttributes.addFlashAttribute("messageSuccess", "delete.blog.message.success");
         return "redirect:/blogs/list";
     }
+
 }
