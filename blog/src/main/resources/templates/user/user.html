@@ -60,6 +60,7 @@
             <span class="invalid-feedback" th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"/>
         </div>
         <button class="btn btn-primary" th:text="#{create.user.add}" type="submit"></button>
+        <a th:href="@{/blogs/list}" class="btn btn-primary" th:text="#{create.user.back-buuton}"></a>
     </form>
 </div>
 

@@ -15,10 +15,7 @@ import javax.validation.constraints.Size;
 @PasswordCompare
 public class UserDto {
 
-    @NotBlank
     private String name;
-
-    @NotBlank
     private String surname;
 
     @NotBlank

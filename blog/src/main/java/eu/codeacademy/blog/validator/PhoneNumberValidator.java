@@ -18,10 +18,12 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, St
     }
 
     private boolean isValidPrefixGlobal(String phoneNumber) {
-        return phoneNumber.length() == 12 && phoneNumber.startsWith(PhoneType.GLOBAL.getPrefixCode());
+        return phoneNumber != null &&
+                (phoneNumber.length() == 12 && phoneNumber.startsWith(PhoneType.GLOBAL.getPrefixCode()));
     }
 
     private boolean isValidPrefixLocal(String phoneNumber) {
-        return phoneNumber.length() == 9 && phoneNumber.startsWith(PhoneType.LOCAL.getPrefixCode());
+        return phoneNumber != null &&
+                (phoneNumber.length() == 9 && phoneNumber.startsWith(PhoneType.LOCAL.getPrefixCode()));
     }
 }
