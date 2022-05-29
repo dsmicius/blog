@@ -13,8 +13,8 @@
     <title>List of Blogs</title>
 </head>
 <body>
-<div class="alert alert-success" th:if="${not message.isEmpty()}">
-    <span th:text="${message}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+<div class="alert alert-success" th:if="${messageSuccess ne null}" th:text="#{${messageSuccess}}">
+<!--    <span th:text="#{${message}}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
 </div>
 <div th:if="${not blogPage.hasContent()}">List is Empty</div>
 <div th:if="${blogPage.hasContent()}">

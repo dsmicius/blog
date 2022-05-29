@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
@@ -31,11 +32,12 @@ public class CommentController {
     }
 
     @PostMapping("/{blogId}/comment")
-    public String createComment(Model model, @PathVariable("blogId") UUID id, CommentDto commentDto) {
+    public String createComment(Model model, @PathVariable("blogId") UUID id, CommentDto commentDto, RedirectAttributes redirectAttributes) {
         Blog blog = blogService.getBlogByBlogId(id);
         commentService.addComment(commentDto, blog);
         model.addAttribute("comment", CommentDto.builder().build());
-        return "redirect:/blogs/list?message=create.comment.message.success";
+        redirectAttributes.addFlashAttribute("messageSuccess", "create.comment.message.success");
+        return "redirect:/blogs/list";
     }
 
     @GetMapping("/list")

@@ -1,3 +1,8 @@
+server:
+  port: 8888
+  servlet:
+    session:
+      tracking-modes: cookie
 spring:
   main:
     banner-mode: console
@@ -35,5 +40,3 @@ logging:
       codeacademy:
         eshop:
           config: DEBUG
-server:
-  port: 8888

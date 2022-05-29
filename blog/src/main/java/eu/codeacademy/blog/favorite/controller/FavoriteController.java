@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
@@ -29,9 +30,10 @@ public class FavoriteController {
     }
 
     @PostMapping
-    public String favorite(SessionStatus sessionStatus) {
+    public String clearFavorite(SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
         sessionStatus.setComplete();
-        return "redirect:/favorite";
+        redirectAttributes.addFlashAttribute("messageSuccess","message.clear.favorite");
+        return "redirect:/blogs/list";
     }
 
     @PostMapping("/{blogId}")

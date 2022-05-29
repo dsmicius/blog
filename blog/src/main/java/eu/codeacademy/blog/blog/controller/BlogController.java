@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
@@ -30,10 +31,11 @@ public class BlogController {
     }
 
     @PostMapping
-    public String createBlog(Model model, BlogDto blog) {
+    public String createBlog(Model model, BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.addBlog(blog);
         model.addAttribute("blog", BlogDto.builder().build());
-        return "redirect:/blogs/list?message=create.blog.message.success";
+        redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
+        return "redirect:/blogs/list";
     }
 
     @GetMapping("/list")
@@ -58,14 +60,16 @@ public class BlogController {
     }
 
     @PostMapping("/{blogId}/update")
-    public String updateBlog(Model model, BlogDto blog) {
+    public String updateBlog(Model model, BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.updateBlog(blog);
+        redirectAttributes.addFlashAttribute("messageSuccess", "update.blog.message.success");
         return "redirect:/blogs/list";
     }
 
     @GetMapping("/{blogId}/delete")
-    public String deleteBlog(Model model, @PathVariable("blogId") UUID id) {
+    public String deleteBlog(Model model, @PathVariable("blogId") UUID id, RedirectAttributes redirectAttributes) {
         blogService.deleteBlog(id);
+        redirectAttributes.addFlashAttribute("messageSuccess", "delete.blog.message.success");
         return "redirect:/blogs/list";
     }
 }
