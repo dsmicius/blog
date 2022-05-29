@@ -5,8 +5,6 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 @Getter
 public class FavoriteDto {
@@ -20,14 +18,6 @@ public class FavoriteDto {
     }
 
     public void remove(FavoriteItem favoriteItem) {
-
         blogItems.remove(favoriteItem);
     }
-
-    public Optional<FavoriteItem> getFavoriteItem(UUID blogId) {
-        return blogItems.stream()
-                .filter(fi -> fi.getBlogDto().getBlogId().equals(blogId))
-                .findAny();
-    }
-
 }

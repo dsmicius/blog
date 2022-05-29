@@ -1,9 +1,7 @@
 package eu.codeacademy.blog.favorite.controller;
 
-import eu.codeacademy.blog.blog.dto.BlogDto;
-import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.favorite.dto.FavoriteDto;
-import eu.codeacademy.blog.favorite.dto.FavoriteItem;
+import eu.codeacademy.blog.favorite.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FavoriteController {
 
-    private final BlogService blogService;
+    private final FavoriteService favoriteService;
 
     @ModelAttribute("favoriteSession")
     public FavoriteDto createCart() {
@@ -31,23 +29,15 @@ public class FavoriteController {
 
     @PostMapping("/{blogId}")
     public String addToFavorite(@PathVariable UUID blogId, @ModelAttribute("favoriteSession") FavoriteDto favorite) {
-        favorite.getFavoriteItem(blogId).ifPresentOrElse(
-                FavoriteItem::getBlogDto,
-                () -> addBlogToFavorite(blogId, favorite)
-        );
+        favoriteService.addToFavoriteByBlogId(blogId, favorite);
 
         return "redirect:/blogs/list";
     }
 
-    private void addBlogToFavorite(UUID blogId, FavoriteDto favorite) {
-        BlogDto blogDto = blogService.getBlogByUUID(blogId);
-        favorite.add(blogDto);
-    }
 
     @PostMapping("/{blogId}/remove")
     public String removeFromFavorite(@PathVariable UUID blogId, @ModelAttribute("favoriteSession") FavoriteDto favorite) {
-        favorite.getFavoriteItem(blogId).ifPresent(favorite::remove);
-
+        favoriteService.removeFromFavoriteByBlogId(blogId, favorite);
         return "redirect:/favorite";
     }
 }
