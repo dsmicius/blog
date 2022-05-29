@@ -52,7 +52,7 @@ public class BlogService {
     public BlogDto getBlogByUUID(UUID id) {
         return blogRepository.findByBlogId(id)
                 .map(mapper::mapTo)
-                .orElseThrow(BlogNotFoundException::new);
+                .orElseThrow(() -> new BlogNotFoundException(id));
     }
 
     @Transactional

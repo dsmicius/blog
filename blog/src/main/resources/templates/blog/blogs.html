@@ -13,8 +13,8 @@
     <title>List of Blogs</title>
 </head>
 <body>
-<div class="alert alert-success" th:if="${messageSuccess ne null}" th:text="#{${messageSuccess}}">
-    <!--    <span th:text="#{${message}}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
+<div class="alert alert-success" th:if="${messageSuccess ne null}">
+        <span th:text="#{${messageSuccess}}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 </div>
 <div th:if="${not blogPage.hasContent()}">List is Empty</div>
 <div th:if="${blogPage.hasContent()}">
@@ -95,11 +95,13 @@
                          style="max-width: 18rem;max-height: 22rem;min-height: 22rem;">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a th:with="subject=${blog.getSubject()}"
-                                   th:href="@{/blogs/{blogId}/view(blogId=${blog.getBlogId()})}"
-                                   th:text="${blog.getSubject().length() > 40} ? ${subject.substring(0, 40)} + ' ...' : ${subject}"
-                                >
-                                </a>
+                                <i>
+                                    <a th:with="subject=${blog.getSubject()}"
+                                       th:href="@{/blogs/{blogId}/view(blogId=${blog.getBlogId()})}"
+                                       th:text="${subject.length() > 40} ? ${subject.substring(0, 40)} + ' ...' : ${subject}"
+                                    >
+                                    </a>
+                                </i>
                             </h5>
                             <p class="card-text"
                                th:with="description=${blog.getDescription()}"
@@ -107,14 +109,12 @@
                             <div class="buttons absolute">
                                 <form method="GET" th:action="@{/blogs/update}">
                                     <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
-                                    <button class="btn btn-primary" th:text="#{blogs.edit-button}">
-                                    </button>
+                                    <button class="btn btn-primary btn-xl" th:text="#{blogs.edit-button}"></button>
                                 </form>
 
                                 <form method="POST" th:action="@{/blogs/delete}">
                                     <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
-                                    <button class="btn btn-danger" th:text="#{blogs.delete-button}">
-                                    </button>
+                                    <button class="btn btn-danger btn-xl" th:text="#{blogs.delete-button}"></button>
                                 </form>
                             </div>
 

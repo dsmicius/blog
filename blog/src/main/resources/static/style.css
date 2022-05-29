@@ -83,3 +83,12 @@ div.absolute.card-bottom {
 button {
     border: none;
 }
+
+.btn-xl {
+    font-size: 14px;
+    width:100%;
+}
+a {
+    text-decoration: none;
+    color: #626060;
+}

@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springframework.boot:spring-boot-devtools:${devToolsVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation "com.h2database:h2:${h2Version}"
     implementation "org.postgresql:postgresql:${postgresVersion}"
     implementation "mysql:mysql-connector-java:${mysqlVersion}"

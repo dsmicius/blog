@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/language.js"></script>
+    <title>List of Blogs</title>
+</head>
+<body>
+
+<div class="container">
+    <h3 th:text="#{create.user}"></h3>
+    <form method="POST" th:object="${userDto}">
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.name}"></label>
+            <input class="form-control" placeholder="Name" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'"
+                   th:field="*{name}" type="text"/>
+            <span class="invalid-feedback" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.surname}"></label>
+            <input class="form-control" placeholder="Surname" th:classappend="${#fields.hasErrors('surname')} ? 'is-invalid'"
+                   th:field="*{surname}" type="text"/>
+            <span class="invalid-feedback" th:errors="*{surname}" th:if="${#fields.hasErrors('surname')}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.email}"></label>
+            <input class="form-control" placeholder="Email" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"
+                   th:field="*{email}" type="text"/>
+            <span class="invalid-feedback" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.password}"></label>
+            <input class="form-control" placeholder="Password" th:classappend="${#fields.hasGlobalErrors()} ? 'is-invalid'"
+                   th:field="*{password}" type="password"/>
+            <span class="invalid-feedback" th:errors="*{global}" th:if="${#fields.hasGlobalErrors}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.password.repeated}"></label>
+            <input class="form-control" placeholder="Repeat Password" th:classappend="${#fields.hasGlobalErrors()} ? 'is-invalid'"
+                   th:field="*{repeatedPassword}" type="password"/>
+            <span class="invalid-feedback" th:errors="*{global}" th:if="${#fields.hasGlobalErrors()}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.zip}"></label>
+            <input class="form-control" placeholder="Zip code" th:classappend="${#fields.hasErrors('zipCode')} ? 'is-invalid'"
+                   th:field="*{zipCode}" type="text"/>
+            <span class="invalid-feedback" th:errors="*{zipCode}" th:if="${#fields.hasErrors('zipCode')}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" th:text="#{create.user.phoneNumber}"></label>
+            <input class="form-control" th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                   placeholder="Phone number" th:field="*{phoneNumber}" type="text"/>
+            <span class="invalid-feedback" th:errors="*{phoneNumber}" th:if="${#fields.hasErrors('phoneNumber')}"/>
+        </div>
+        <button class="btn btn-primary" th:text="#{create.user.add}" type="submit"></button>
+    </form>
+</div>
+
+</body>
+</html>
