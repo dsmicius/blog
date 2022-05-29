@@ -8,15 +8,16 @@ import org.springframework.stereotype.Component;
 public class FavoriteMapper {
 
     public FavoriteDto mapTo(BlogDto blogDto) {
-        return FavoriteDto.builder()
-                .blogId(blogDto.getBlogId())
-                .subject(blogDto.getSubject())
-                .description(blogDto.getDescription())
-                .createDate(blogDto.getCreateDate())
-                .updateDate(blogDto.getUpdateDate())
-                .deleteDate(blogDto.getDeleteDate())
-                .author(blogDto.getAuthor())
-                .status(blogDto.getStatus())
-                .build();
+//        return FavoriteDto.builder()
+//                .blogId(blogDto.getBlogId())
+//                .subject(blogDto.getSubject())
+//                .description(blogDto.getDescription())
+//                .createDate(blogDto.getCreateDate())
+//                .updateDate(blogDto.getUpdateDate())
+//                .deleteDate(blogDto.getDeleteDate())
+//                .author(blogDto.getAuthor())
+//                .status(blogDto.getStatus())
+//                .build();
+        return null;
     }
 }
