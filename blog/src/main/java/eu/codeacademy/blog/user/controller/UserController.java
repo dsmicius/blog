@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.user.controller;
 
 import eu.codeacademy.blog.user.dto.UserDto;
+import eu.codeacademy.blog.user.service.UserService;
 import eu.codeacademy.blog.validator.spring.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserValidator validator;
+    private final UserService userService;
 
     @GetMapping("/register")
     public String getUserForm(Model model) {
@@ -32,6 +34,8 @@ public class UserController {
         if (errors.hasErrors()) {
             return "/user/user";
         }
+
+        userService.register(userDto);
 
         return "redirect:/user";
     }
