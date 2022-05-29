@@ -31,11 +31,11 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <div class="navbar-nav">
-                                <a class="nav-link active" th:href="@{/blogs/}" th:text="#{nav.create.blog}"></a>
+                                <a class="nav-link" th:href="@{/blogs/}" th:text="#{nav.create.blog}"></a>
                                 <a class="nav-link" th:href="@{/blogs/list/}" th:text="#{nav.list}"></a>
                                 <a class="nav-link" href="#" th:text="#{nav.register}"></a>
                                 <a class="nav-link" th:href="@{/favorite}" th:text="#{nav.favorites}"></a>
-                                <select class="nav-item dropdown" id="languageSelector">
+                                <select class="nav-item dropdown btn-light" id="languageSelector">
                                     <option value="" th:text="#{lang.option}"></option>
                                     <option value="LT" th:text="Lietuvių"></option>
                                     <option value="US" th:text="English"></option>

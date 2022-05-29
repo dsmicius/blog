@@ -5,6 +5,7 @@ import eu.codeacademy.blog.favorite.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.UUID;
 
@@ -25,6 +26,12 @@ public class FavoriteController {
     @GetMapping
     public String openFavorite(@ModelAttribute("favoriteSession") FavoriteDto favorite) {
         return "favorite/favorite";
+    }
+
+    @PostMapping
+    public String favorite(SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+        return "redirect:/favorite";
     }
 
     @PostMapping("/{blogId}")
