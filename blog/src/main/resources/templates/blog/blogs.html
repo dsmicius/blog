@@ -114,7 +114,7 @@
 
                                 <form method="POST" th:action="@{/blogs/delete}">
                                     <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
-                                    <button class="btn btn-danger btn-xl" th:text="#{blogs.delete-button}"></button>
+                                    <button class="btn btn-danger btn-xl" th:text="#{blogs.delete-button}" th:onclick="return confirm('Are you sure you want to delete this item?')"></button>
                                 </form>
                             </div>
 
