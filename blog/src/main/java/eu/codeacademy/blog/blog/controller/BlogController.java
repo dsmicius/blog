@@ -19,19 +19,24 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/blogs")
 public class BlogController {
+
+    private static final String BLOG_ROOT_PATH = "/blogs";
+    private static final String BLOG_LIST_PATH = "/public" + BLOG_ROOT_PATH + "/list";
+    private static final String BLOG_UPDATE_PATH = BLOG_ROOT_PATH + "/update";
+    private static final String BLOG_DELETE_PATH = BLOG_ROOT_PATH + "/delete";
+    private static final String BLOG_VIEW_PATH = BLOG_ROOT_PATH + "/{blogId}/view";
     private final BlogService blogService;
     private final MessageService messageService;
     private final CommentService commentService;
 
-    @GetMapping
+    @GetMapping(BLOG_ROOT_PATH)
     public String openCreateBlogForm(Model model) {
         model.addAttribute("blog", BlogDto.builder().build());
         return "blog/blog";
     }
 
-    @PostMapping
+    @PostMapping(BLOG_ROOT_PATH)
     public String createBlog(Model model, @Valid BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.addBlog(blog);
         model.addAttribute("blog", BlogDto.builder().build());
@@ -39,20 +44,20 @@ public class BlogController {
         return "redirect:/blogs/list";
     }
 
-    @GetMapping("/list")
+    @GetMapping(BLOG_LIST_PATH)
     public String getBlogs(Model model, @PageableDefault(size = 8, sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable, String message) {
         model.addAttribute("blogPage", blogService.getBlogPaginated(pageable));
         model.addAttribute("message", messageService.getMessage(message));
         return "blog/blogs";
     }
 
-    @GetMapping("/update")
+    @GetMapping(BLOG_UPDATE_PATH)
     public String getUpdateBlog(Model model, @RequestParam UUID blogId) {
         model.addAttribute("blog", blogService.getBlogByUUID(blogId));
         return "blog/blog_update";
     }
 
-    @GetMapping("/{blogId}/view")
+    @GetMapping(BLOG_VIEW_PATH)
     public String getViewBlog(Model model, @PathVariable("blogId") UUID id) {
         Blog blog = blogService.getBlogByBlogId(id);
         model.addAttribute("blog", blogService.getBlogByUUID(id));
@@ -60,14 +65,14 @@ public class BlogController {
         return "blog/blog_view";
     }
 
-    @PostMapping("/update")
+    @PostMapping(BLOG_UPDATE_PATH)
     public String updateBlog(BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.updateBlog(blog);
         redirectAttributes.addFlashAttribute("messageSuccess", "update.blog.message.success");
         return "redirect:/blogs/list";
     }
 
-    @PostMapping("/delete")
+    @PostMapping(BLOG_DELETE_PATH)
     public String deleteBlog(@RequestParam UUID blogId, RedirectAttributes redirectAttributes) {
         blogService.deleteBlog(blogId);
         redirectAttributes.addFlashAttribute("messageSuccess", "delete.blog.message.success");

@@ -14,7 +14,8 @@
 </head>
 <body>
 <div class="alert alert-success" th:if="${messageSuccess ne null}">
-        <span th:text="#{${messageSuccess}}" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <span th:text="#{${messageSuccess}}" class="closebtn"
+          onclick="this.parentElement.style.display='none';">&times;</span>
 </div>
 <div th:if="${not blogPage.hasContent()}">List is Empty</div>
 <div th:if="${blogPage.hasContent()}">
@@ -32,9 +33,9 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <div class="navbar-nav">
                                 <a class="nav-link" th:href="@{/blogs/}" th:text="#{nav.create.blog}"></a>
-                                <a class="nav-link" th:href="@{/blogs/list/}" th:text="#{nav.list}"></a>
-                                <a class="nav-link" th:href="@{/users/register}" th:text="#{nav.register}"></a>
-                                <a class="nav-link" th:href="@{/favorite}" th:text="#{nav.favorites}"></a>
+                                <a class="nav-link" th:href="@{/public/blogs/list/}" th:text="#{nav.list}"></a>
+                                <a class="nav-link" th:href="@{/public/users/register}" th:text="#{nav.register}"></a>
+                                <a class="nav-link" th:href="@{/public/favorite}" th:text="#{nav.favorites}"></a>
                                 <select class="nav-item dropdown btn-light" id="languageSelector">
                                     <option value="" th:text="#{lang.option}"></option>
                                     <option value="LT" th:text="Lietuvių"></option>
@@ -43,11 +44,15 @@
 
                             </div>
                         </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="d-flex" method="GET" th:action="@{/public/blog-finder}">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="blogSubject">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <a class="btn btn-success" th:href="@{/logout}">LOGOUT</a>
+                        <form class="d-flex" th:action="@{/logout}">
+                            <div class="btn-logout">
+                                <button class="btn btn-success">LOGOUT</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -115,7 +120,8 @@
 
                                 <form method="POST" th:action="@{/blogs/delete}">
                                     <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
-                                    <button class="btn btn-danger btn-xl" th:text="#{blogs.delete-button}" th:onclick="return confirm('Are you sure you want to delete this item?')"></button>
+                                    <button class="btn btn-danger btn-xl" th:text="#{blogs.delete-button}"
+                                            th:onclick="return confirm('Are you sure you want to delete this item?')"></button>
                                 </form>
                             </div>
 
