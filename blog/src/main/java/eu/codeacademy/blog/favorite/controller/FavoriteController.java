@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/favorite")
+@RequestMapping("/public/favorite")
 @SessionAttributes("favoriteSession")
 @RequiredArgsConstructor
 public class FavoriteController {
@@ -26,6 +26,7 @@ public class FavoriteController {
 
     @GetMapping
     public String openFavorite(@ModelAttribute("favoriteSession") FavoriteDto favorite) {
+
         return "favorite/favorite";
     }
 
@@ -33,20 +34,20 @@ public class FavoriteController {
     public String clearFavorite(SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
         sessionStatus.setComplete();
         redirectAttributes.addFlashAttribute("messageSuccess","message.clear.favorite");
-        return "redirect:/blogs/list";
+        return "redirect:/public/blogs/list";
     }
 
     @PostMapping("/{blogId}")
     public String addToFavorite(@PathVariable UUID blogId, @ModelAttribute("favoriteSession") FavoriteDto favorite) {
         favoriteService.addToFavoriteByBlogId(blogId, favorite);
 
-        return "redirect:/blogs/list";
+        return "redirect:/public/blogs/list";
     }
 
 
     @PostMapping("/{blogId}/remove")
     public String removeFromFavorite(@PathVariable UUID blogId, @ModelAttribute("favoriteSession") FavoriteDto favorite) {
         favoriteService.removeFromFavoriteByBlogId(blogId, favorite);
-        return "redirect:/favorite";
+        return "redirect:/public/favorite";
     }
 }

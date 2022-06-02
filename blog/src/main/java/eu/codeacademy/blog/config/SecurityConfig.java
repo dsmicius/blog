@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/public/**").permitAll()
+                .antMatchers("/public/**","/").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/blogs/list", true)
+                .defaultSuccessUrl("/public/blogs/list", true)
                 .usernameParameter("loginEmail")
                 .passwordParameter("loginPassword")
                 .and()

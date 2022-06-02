@@ -11,7 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -21,6 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BlogController {
 
+    //TODO: perkelti i viena interface visus root pathus
     private static final String BLOG_ROOT_PATH = "/blogs";
     private static final String BLOG_LIST_PATH = "/public" + BLOG_ROOT_PATH + "/list";
     private static final String BLOG_UPDATE_PATH = BLOG_ROOT_PATH + "/update";
@@ -41,7 +45,7 @@ public class BlogController {
         blogService.addBlog(blog);
         model.addAttribute("blog", BlogDto.builder().build());
         redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
-        return "redirect:/blogs/list";
+        return "redirect:/public/blogs/list";
     }
 
     @GetMapping(BLOG_LIST_PATH)
@@ -69,14 +73,13 @@ public class BlogController {
     public String updateBlog(BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.updateBlog(blog);
         redirectAttributes.addFlashAttribute("messageSuccess", "update.blog.message.success");
-        return "redirect:/blogs/list";
+        return "redirect:/public/blogs/list";
     }
 
     @PostMapping(BLOG_DELETE_PATH)
     public String deleteBlog(@RequestParam UUID blogId, RedirectAttributes redirectAttributes) {
         blogService.deleteBlog(blogId);
         redirectAttributes.addFlashAttribute("messageSuccess", "delete.blog.message.success");
-        return "redirect:/blogs/list";
+        return "redirect:/public/blogs/list";
     }
-
 }
