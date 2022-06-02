@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.blog.helper;
+package eu.codeacademy.blog.helper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

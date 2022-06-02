@@ -2,7 +2,7 @@ package eu.codeacademy.blog.blog.controller;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.entity.Blog;
-import eu.codeacademy.blog.blog.helper.MessageService;
+import eu.codeacademy.blog.helper.MessageService;
 import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
