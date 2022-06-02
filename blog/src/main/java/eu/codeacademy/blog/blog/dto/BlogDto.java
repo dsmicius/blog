@@ -4,6 +4,8 @@ import eu.codeacademy.blog.comment.entity.Comment;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
 
@@ -11,7 +13,13 @@ import java.util.UUID;
 @Builder
 public class BlogDto {
     private UUID blogId;
+    @NotBlank
+    @Size(
+            min = 3,
+            max = 100
+    )
     private String subject;
+    @NotBlank
     private String description;
     private String createDate;
     private String updateDate;

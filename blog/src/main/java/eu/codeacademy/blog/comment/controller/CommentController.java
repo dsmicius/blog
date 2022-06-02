@@ -40,11 +40,11 @@ public class CommentController {
         return "redirect:/blogs/list";
     }
 
-    @GetMapping("/list")
-    public String getComments(Model model) {
-        model.addAttribute("comments",commentService.getComments());
-        return "comment/comments";
-    }
+//    @GetMapping("/list")
+//    public String getComments(Model model) {
+//        model.addAttribute("comments",commentService.getComments());
+//        return "comment/comments";
+//    }
 
     @GetMapping("/{blogId}/list")
     public String getComments(Model model, @PathVariable("blogId") UUID id) {

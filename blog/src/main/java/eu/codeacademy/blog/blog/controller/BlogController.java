@@ -2,9 +2,9 @@ package eu.codeacademy.blog.blog.controller;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.entity.Blog;
-import eu.codeacademy.blog.helper.MessageService;
 import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.comment.service.CommentService;
+import eu.codeacademy.blog.helper.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -31,7 +32,7 @@ public class BlogController {
     }
 
     @PostMapping
-    public String createBlog(Model model, BlogDto blog, RedirectAttributes redirectAttributes) {
+    public String createBlog(Model model, @Valid BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.addBlog(blog);
         model.addAttribute("blog", BlogDto.builder().build());
         redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
