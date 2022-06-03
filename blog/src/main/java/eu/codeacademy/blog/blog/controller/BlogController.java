@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,10 @@ public class BlogController {
     }
 
     @PostMapping(BLOG_ROOT_PATH)
-    public String createBlog(Model model, @Valid BlogDto blog, RedirectAttributes redirectAttributes) {
+    public String createBlog(Model model, @Valid BlogDto blog, RedirectAttributes redirectAttributes, UsernamePasswordAuthenticationToken principal) {
+//        if (principal.getPrincipal() instanceof UserDetails) {
+//            UserDto userDto = (UserDto) principal.getPrincipal();
+//        }
         blogService.addBlog(blog);
 //        model.addAttribute("blog", BlogDto.builder().build());
         redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");

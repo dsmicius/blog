@@ -18,7 +18,6 @@
     <span th:text="#{${messageSuccess}}" class="closebtn"
           onclick="this.parentElement.style.display='none';">&times;</span>
 </div>
-<div th:if="${not blogPage.hasContent()}">List is Empty</div>
 <div>
     <div class="grid-container">
         <div class="menu-bar">
@@ -60,11 +59,6 @@
                         <div sec:authorize="isAuthenticated()">
                             <a class="btn btn-success" aria-current="page" th:href="@{/logout}"
                                th:text="#{nav.logout}"></a>
-                            <!--                            <form class="d-flex" th:action="@{/logout}">-->
-                            <!--                                <div class="btn-logout">-->
-                            <!--                                    <button class="btn btn-success">LOGOUT</button>-->
-                            <!--                                </div>-->
-                            <!--                            </form>-->
                         </div>
 
                     </div>
@@ -170,6 +164,8 @@
         </div>
 
         <div class="total-elements">
+            <h2 class="d-flex justify-content-center" th:if="${not blogPage.hasContent()}"
+                th:text="'List is Empty'"></h2>
             <p class="d-flex justify-content-center" th:text="'Total elements: ' + ${blogPage.totalElements}"></p>
             <br>
         </div>
@@ -205,7 +201,6 @@
             </nav>
         </div>
         <br>
-        <hr>
         <div class="footer">
             <footer>
                 <p>Copyright © 2022 Dominykas<br>

@@ -1,6 +1,6 @@
 package eu.codeacademy.blog.user.entity;
 
-import org.springframework.security.core.GrantedAuthority;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Authority implements GrantedAuthority {
+@Getter
+public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +17,4 @@ public class Authority implements GrantedAuthority {
 
     private String name;
 
-    @Override
-    public String getAuthority() {
-
-        return "ROLE_" + this.name;
-    }
 }

@@ -32,7 +32,7 @@
                             <a class="nav-link" th:href="@{/public/blogs/list/}" th:text="#{nav.list}"></a>
                             <a class="nav-link" th:href="@{/public/users/register}" th:text="#{nav.register}"></a>
                             <a class="nav-link" th:href="@{/public/favorite}" th:text="#{nav.favorites}"></a>
-                            <select class="nav-item dropdown btn-light" id="languageSelector">
+                            <select class="nav-link dropdown btn-light" id="languageSelector">
                                 <option value="" th:text="#{lang.option}"></option>
                                 <option value="LT" th:text="Lietuvių"></option>
                                 <option value="US" th:text="English"></option>
@@ -42,19 +42,28 @@
                             <p></p>
                             <p></p>
                             <form method="POST">
-                                <button class="btn btn-secondary" type="submit" th:text="#{nav.clear-favorite-button}"></button>
+                                <button class="btn btn-secondary" type="submit"
+                                        th:text="#{nav.clear-favorite-button}"></button>
                             </form>
                         </div>
                     </ul>
+                    <div sec:authorize="isAuthenticated()">
+                        <i class="me-2 justify-content-center">Sveiki, <span
+                                sec:authentication="principal.fullName"></span></i>
+                    </div>
                     <form class="d-flex" method="GET" th:action="@{/public/blog-finder}">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="blogSubject">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                               name="blogSubject">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
-                    <form class="d-flex" th:action="@{/logout}">
-                        <div class="btn-logout">
-                            <button class="btn btn-success">LOGOUT</button>
-                        </div>
-                    </form>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a class="btn btn-success" aria-current="page" th:href="@{/login}"
+                           th:text="#{nav.login}"></a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <a class="btn btn-success" aria-current="page" th:href="@{/logout}"
+                           th:text="#{nav.logout}"></a>
+                    </div>
                 </div>
             </div>
         </nav>
