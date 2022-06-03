@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -112,7 +113,7 @@
                             <p class="card-text"
                                th:with="description=${blog.getDescription()}"
                                th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}"></p>
-                            <div class="buttons absolute">
+                            <div sec:authorize="hasRole('ADMIN')" class="buttons absolute">
                                 <form method="GET" th:action="@{/blogs/update}">
                                     <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
                                     <button class="btn btn-primary btn-xl" th:text="#{blogs.edit-button}"></button>

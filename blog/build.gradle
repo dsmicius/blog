@@ -23,6 +23,7 @@ ext {
     h2Version = '2.1.212'
     postgresVersion = '42.3.4'
     mysqlVersion = '8.0.29'
+    thymeleafExtrasVersion = '3.0.4.RELEASE'
 }
 
 dependencies {
@@ -32,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleafExtrasVersion}"
 
     implementation "com.h2database:h2:${h2Version}"
     implementation "org.postgresql:postgresql:${postgresVersion}"
