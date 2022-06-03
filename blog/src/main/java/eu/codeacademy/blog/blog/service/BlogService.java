@@ -63,7 +63,7 @@ public class BlogService {
                     .subject(blogDto.getSubject())
                     .description(blogDto.getDescription())
                     .createDate(currentDate.getCurrentDate())
-                    .updateDate(blogDto.getUpdateDate())
+                    .updateDate(currentDate.getCurrentDate())
                     .deleteDate(blogDto.getDeleteDate())
                     .author(blogDto.getAuthor())
                     .status(blogDto.getStatus())

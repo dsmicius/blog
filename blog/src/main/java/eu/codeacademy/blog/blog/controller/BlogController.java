@@ -44,7 +44,7 @@ public class BlogController {
     @PostMapping(BLOG_ROOT_PATH)
     public String createBlog(Model model, @Valid BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.addBlog(blog);
-        model.addAttribute("blog", BlogDto.builder().build());
+//        model.addAttribute("blog", BlogDto.builder().build());
         redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
         return "redirect:/public/blogs/list";
     }
