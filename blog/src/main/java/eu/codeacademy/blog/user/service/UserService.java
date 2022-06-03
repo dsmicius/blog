@@ -4,6 +4,7 @@ import eu.codeacademy.blog.user.dto.UserDto;
 import eu.codeacademy.blog.user.entity.User;
 import eu.codeacademy.blog.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,13 +12,14 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void register(UserDto userDto) {
         userRepository.save(User.builder()
                 .email(userDto.getEmail())
                 .name(userDto.getName())
                 .surname(userDto.getSurname())
-                .password(userDto.getPassword()) //FIXME: do not save as plain text, for security reason!!!!
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .phoneNumber(userDto.getPhoneNumber())
                 .zipCode(userDto.getZipCode())
                 .build());
