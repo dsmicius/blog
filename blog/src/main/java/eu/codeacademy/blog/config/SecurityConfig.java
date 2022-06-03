@@ -41,17 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-                .withUser("user@blog.lt")
-                    .password("{bcrypt}$2a$10$vr/.VILTpNCyLvOGTg14xu1hIMoIErBMfd.SvgI8BgUdQkNZMPBga") //user
-                    .roles("USER")
-                    .and()
                 .withUser("admin@blog.lt")
-                    .password("{bcrypt}$2a$10$Omgu0.JKItcuZ5jSn/N96eDSllbB1aLA40MzCOJTUO/O9fcwxZSXm") //admin
-                    .roles("USER","ADMIN")
-                    .and()
-                .withUser("noop@blog.lt")
-                    .password("{noop}")
-                    .roles("USER");
+                    .password("{bcrypt}$2a$10$Y3GKDQIRG9CXCf8dLH836es1/xI9NSOQ1nUuIuZJXgwvUgBytfcOO")
+                    .roles("USER","ADMIN");
+
     }
 
 }
