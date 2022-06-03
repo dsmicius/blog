@@ -30,10 +30,6 @@ spring:
     web:
       pageable:
         default-page-size: 3
-  security:
-    user:
-      name: user@blog.lt
-      password: user
 logging:
   level:
     eu:

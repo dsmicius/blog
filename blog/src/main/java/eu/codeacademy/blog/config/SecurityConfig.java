@@ -2,6 +2,7 @@ package eu.codeacademy.blog.config;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -30,10 +31,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().requestMatchers(
                 PathRequest.toStaticResources().atCommonLocations(),
                 PathRequest.toH2Console()
         );
     }
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("user@blog.lt")
+                    .password("{bcrypt}$2a$10$vr/.VILTpNCyLvOGTg14xu1hIMoIErBMfd.SvgI8BgUdQkNZMPBga") //user
+                    .roles("USER")
+                    .and()
+                .withUser("admin@blog.lt")
+                    .password("{bcrypt}$2a$10$Omgu0.JKItcuZ5jSn/N96eDSllbB1aLA40MzCOJTUO/O9fcwxZSXm") //admin
+                    .roles("USER","ADMIN")
+                    .and()
+                .withUser("noop@blog.lt")
+                    .password("{noop}")
+                    .roles("USER");
+    }
+
 }
