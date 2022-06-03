@@ -11,7 +11,7 @@
 <div class="blog-update container">
     <h3 th:text="#{comment.create}"></h3>
     <i th:text="${blog.getSubject()}"></i>
-    <form action="" method="post" th:object="${comment}">
+    <form action="" method="post" th:object="${comment}" th:action="@{/comments(blogId=${blog.getBlogId()})}">
         <div class="form-floating">
         <textarea
                 class="form-control"

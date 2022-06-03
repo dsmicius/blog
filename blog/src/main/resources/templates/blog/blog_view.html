@@ -16,9 +16,10 @@
         <br>
         <p th:text="${blog.getDescription()}"></p>
     </div>
-    <br>
-    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}"
-       th:text="#{comment.add}"></a>
+    <form method="GET" th:action="@{/comments}">
+        <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
+        <button class="btn btn-link btn-comment" th:text="#{comment.add}"></button>
+    </form>
     <br>
     <br>
     <i th:text="#{comment.comments}"></i>

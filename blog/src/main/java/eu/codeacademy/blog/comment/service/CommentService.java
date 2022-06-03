@@ -1,6 +1,8 @@
 package eu.codeacademy.blog.comment.service;
 
+import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.entity.Blog;
+import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.comment.dto.CommentDto;
 import eu.codeacademy.blog.comment.entity.Comment;
 import eu.codeacademy.blog.comment.mapper.CommentMapper;
@@ -20,8 +22,10 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;
     private final CurrentDate currentDate;
+    private final BlogService blogService;
 
-    public void addComment(CommentDto commentDto, Blog blog) {
+    public void addComment(CommentDto commentDto, BlogDto blogDto) {
+        Blog blog = blogService.getBlogByBlogId(blogDto.getBlogId());
         commentRepository.save(Comment.builder()
                 .commentId(UUID.randomUUID())
                 .text(commentDto.getText())

@@ -46,7 +46,8 @@
                             </div>
                         </ul>
                         <form class="d-flex" method="GET" th:action="@{/public/blog-finder}">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="blogSubject">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                   name="blogSubject">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                         <form class="d-flex" th:action="@{/logout}">
@@ -144,8 +145,12 @@
                                 <div class="right-side">
                                     <i th:text="#{comments.totalComments} + ': ' + ${blog.getComments().size()}"></i>
                                     <br>
-                                    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}"
-                                       th:text="#{comment.add}"></a>
+                                    <!--                                    <a th:href="@{/comments/{blogId}/comment(blogId=${blog.getBlogId()})}"-->
+                                    <!--                                       th:text="#{comment.add}"></a>-->
+                                    <form method="GET" th:action="@{/comments}">
+                                        <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
+                                        <button class="btn btn-link btn-comment" th:text="#{comment.add}"></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

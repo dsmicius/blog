@@ -10,7 +10,7 @@
 <body>
 <div class="blog-update container">
     <h3 th:text="#{update.blog}"></h3>
-    <form action="" method="post" th:object="${blog}">
+    <form action="" method="post" th:object="${blog}" th:action="@{/blogs}">
         <div class="form-floating">
         <textarea
                 class="form-control"

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,14 +69,14 @@ public class BlogController {
         model.addAttribute("comments", commentService.getBlogComments(blog));
         return "blog/blog_view";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(BLOG_UPDATE_PATH)
     public String updateBlog(BlogDto blog, RedirectAttributes redirectAttributes) {
         blogService.updateBlog(blog);
         redirectAttributes.addFlashAttribute("messageSuccess", "update.blog.message.success");
         return "redirect:/public/blogs/list";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(BLOG_DELETE_PATH)
     public String deleteBlog(@RequestParam UUID blogId, RedirectAttributes redirectAttributes) {
         blogService.deleteBlog(blogId);

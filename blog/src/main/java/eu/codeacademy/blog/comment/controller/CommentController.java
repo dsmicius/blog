@@ -1,5 +1,6 @@
 package eu.codeacademy.blog.comment.controller;
 
+import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.comment.dto.CommentDto;
@@ -7,10 +8,7 @@ import eu.codeacademy.blog.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
@@ -23,28 +21,22 @@ public class CommentController {
     private final BlogService blogService;
     private final CommentService commentService;
 
-    @GetMapping("/{blogId}/comment")
-    public String openCommentForm(Model model, @PathVariable("blogId") UUID id) {
-        Blog blog = blogService.getBlogByBlogId(id);
+    @GetMapping()
+    public String openCommentForm(Model model, @RequestParam UUID blogId) {
+        BlogDto blogDto = blogService.getBlogByUUID(blogId);
         model.addAttribute("comment", CommentDto.builder().build());
-        model.addAttribute("blog",blog);
+        model.addAttribute("blog",blogDto);
         return "comment/comment";
     }
 
-    @PostMapping("/{blogId}/comment")
-    public String createComment(Model model, @PathVariable("blogId") UUID id, CommentDto commentDto, RedirectAttributes redirectAttributes) {
-        Blog blog = blogService.getBlogByBlogId(id);
+    @PostMapping
+    public String createComment(Model model, @RequestParam UUID blogId, CommentDto commentDto, RedirectAttributes redirectAttributes) {
+        BlogDto blog = blogService.getBlogByUUID(blogId);
         commentService.addComment(commentDto, blog);
         model.addAttribute("comment", CommentDto.builder().build());
         redirectAttributes.addFlashAttribute("messageSuccess", "create.comment.message.success");
-        return "redirect:/blogs/list";
+        return "redirect:/public/blogs/list";
     }
-
-//    @GetMapping("/list")
-//    public String getComments(Model model) {
-//        model.addAttribute("comments",commentService.getComments());
-//        return "comment/comments";
-//    }
 
     @GetMapping("/{blogId}/list")
     public String getComments(Model model, @PathVariable("blogId") UUID id) {
@@ -52,5 +44,4 @@ public class CommentController {
         model.addAttribute("comments",commentService.getBlogComments(blog));
         return "comment/comments";
     }
-
 }
