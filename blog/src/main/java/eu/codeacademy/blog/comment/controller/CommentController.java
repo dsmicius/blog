@@ -1,14 +1,16 @@
 package eu.codeacademy.blog.comment.controller;
 
 import eu.codeacademy.blog.blog.dto.BlogDto;
-import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.comment.dto.CommentDto;
 import eu.codeacademy.blog.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
@@ -38,10 +40,10 @@ public class CommentController {
         return "redirect:/public/blogs/list";
     }
 
-    @GetMapping("/{blogId}/list")
-    public String getComments(Model model, @PathVariable("blogId") UUID id) {
-        Blog blog = blogService.getBlogByBlogId(id);
-        model.addAttribute("comments",commentService.getBlogComments(blog));
-        return "comment/comments";
-    }
+//    @GetMapping("/{blogId}/list")
+//    public String getComments(Model model, @PathVariable("blogId") UUID id) {
+//        Blog blog = blogService.getBlogByBlogId(id);
+//        model.addAttribute("comments",commentService.getBlogComments(blog));
+//        return "comment/comments";
+//    }
 }

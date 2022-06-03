@@ -37,4 +37,5 @@ public class UserDto {
 
     @PhoneNumber(type = PhoneType.LOCAL)
     private String phoneNumber;
+
 }
