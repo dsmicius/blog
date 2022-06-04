@@ -25,7 +25,7 @@ public class UserMapper {
                         .build())
                 .roles(
                         userEntity.getAuthorities().stream()
-                                .map((a) -> "ROLE_" + a.getName())
+                                .map(getAuthority())
                                 .map(SimpleGrantedAuthority::new)
                                 .collect(Collectors.toUnmodifiableSet())
                 )
