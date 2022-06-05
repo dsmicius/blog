@@ -38,4 +38,8 @@ public class UserDto {
     @PhoneNumber(type = PhoneType.LOCAL)
     private String phoneNumber;
 
+    public String getFullName() {
+        return this.name + " " + this.surname;
+    }
+
 }

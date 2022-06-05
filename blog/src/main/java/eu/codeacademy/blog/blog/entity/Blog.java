@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.blog.entity;
 
 import eu.codeacademy.blog.comment.entity.Comment;
+import eu.codeacademy.blog.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,7 +27,11 @@ public class Blog {
     private String deleteDate;
     private String author;
     private String status;
+
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
     Set<Comment> comments;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

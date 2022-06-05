@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.comment.entity;
 
 import eu.codeacademy.blog.blog.entity.Blog;
+import eu.codeacademy.blog.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,4 +31,8 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "blog_id", nullable = false)
     private Blog blog;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

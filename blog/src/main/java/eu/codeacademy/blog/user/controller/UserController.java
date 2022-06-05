@@ -1,7 +1,7 @@
 package eu.codeacademy.blog.user.controller;
 
 import eu.codeacademy.blog.user.dto.UserDto;
-import eu.codeacademy.blog.user.service.UserService;
+import eu.codeacademy.blog.user.service.UserRegistrationService;
 import eu.codeacademy.blog.validator.spring.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class UserController {
     private static final String REGISTER_ROOT_PATH = "/users";
     private static final String REGISTER_PATH = "/public" + REGISTER_ROOT_PATH + "/register";
     private final UserValidator validator;
-    private final UserService userService;
+    private final UserRegistrationService userRegistrationService;
 
     @GetMapping(REGISTER_PATH)
     public String getUserForm(Model model) {
@@ -35,7 +35,7 @@ public class UserController {
             return "/user/user";
         }
 
-        userService.register(userDto);
+        userRegistrationService.register(userDto);
 
         return "redirect:/users";
     }

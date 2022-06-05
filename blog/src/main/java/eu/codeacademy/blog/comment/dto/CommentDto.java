@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.comment.dto;
 
 import eu.codeacademy.blog.blog.entity.Blog;
+import eu.codeacademy.blog.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,4 +17,5 @@ public class CommentDto {
     private String deleteDate;
     private String author;
     private Blog blog;
+    private UserDto userDto;
 }

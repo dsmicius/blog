@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.user.dto;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
+@Getter
 public class UserRoleDto implements UserDetails {
 
     private UserDto user;

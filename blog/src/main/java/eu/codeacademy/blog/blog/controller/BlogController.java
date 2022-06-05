@@ -5,12 +5,14 @@ import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.blog.service.BlogService;
 import eu.codeacademy.blog.comment.service.CommentService;
 import eu.codeacademy.blog.helper.MessageService;
+import eu.codeacademy.blog.user.dto.UserRoleDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class BlogController {
     private static final String BLOG_LIST_PATH = "/public" + BLOG_ROOT_PATH + "/list";
     private static final String BLOG_UPDATE_PATH = BLOG_ROOT_PATH + "/update";
     private static final String BLOG_DELETE_PATH = BLOG_ROOT_PATH + "/delete";
-    private static final String BLOG_VIEW_PATH = BLOG_ROOT_PATH + "/{blogId}/view";
+    private static final String BLOG_VIEW_PATH = "/public" + BLOG_ROOT_PATH + "/{blogId}/view";
     private final BlogService blogService;
     private final MessageService messageService;
     private final CommentService commentService;
@@ -43,13 +45,16 @@ public class BlogController {
     }
 
     @PostMapping(BLOG_ROOT_PATH)
-    public String createBlog(Model model, @Valid BlogDto blog, RedirectAttributes redirectAttributes, UsernamePasswordAuthenticationToken principal) {
-//        if (principal.getPrincipal() instanceof UserDetails) {
-//            UserDto userDto = (UserDto) principal.getPrincipal();
-//        }
-        blogService.addBlog(blog);
-//        model.addAttribute("blog", BlogDto.builder().build());
-        redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
+    public String createBlog(@Valid BlogDto blog,
+                             RedirectAttributes redirectAttributes,
+                             UsernamePasswordAuthenticationToken principal) {
+        if (principal.getPrincipal() instanceof UserDetails) {
+            UserRoleDto userDto = (UserRoleDto) principal.getPrincipal();
+
+            blogService.addBlog(blog, userDto.getUser());
+            redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
+            return "redirect:/public/blogs/list";
+        }
         return "redirect:/public/blogs/list";
     }
 
@@ -73,6 +78,7 @@ public class BlogController {
         model.addAttribute("comments", commentService.getBlogComments(blog));
         return "blog/blog_view";
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(BLOG_UPDATE_PATH)
     public String updateBlog(BlogDto blog, RedirectAttributes redirectAttributes) {
@@ -80,6 +86,7 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("messageSuccess", "update.blog.message.success");
         return "redirect:/public/blogs/list";
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(BLOG_DELETE_PATH)
     public String deleteBlog(@RequestParam UUID blogId, RedirectAttributes redirectAttributes) {

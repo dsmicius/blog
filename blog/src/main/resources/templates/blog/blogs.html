@@ -16,8 +16,13 @@
 <body>
 <div class="alert alert-success" th:if="${messageSuccess ne null}">
     <span th:text="#{${messageSuccess}}" class="closebtn"
-          onclick="this.parentElement.style.display='none';">&times;</span>
+          onclick="this.parentElement.style.display='none';"></span>
 </div>
+<div class="alert alert-danger" th:if="${messageError ne null}">
+    <span th:text="#{${messageError}}" class="closebtn"
+          onclick="this.parentElement.style.display='none';"></span>
+</div>
+
 <div>
     <div class="grid-container">
         <div class="menu-bar">
@@ -74,7 +79,7 @@
                     <p>
                         <a class="btn btn-light"
                            th:with="direction=${blogPage.sort.getOrderFor('createDate')?.direction}"
-                           th:href="@{/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
+                           th:href="@{/public/blogs/list(sort='createDate,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'} )}">
                             <span th:text="#{filter.created}"></span>
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-9-1' : 'fa-arrow-up-1-9'}"
@@ -84,7 +89,7 @@
                     <p>
                         <a class="btn btn-light"
                            th:with=" direction=${blogPage.sort.getOrderFor('subject')?.direction}"
-                           th:href="@{/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
+                           th:href="@{/public/blogs/list(sort='subject,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
                             <span th:text="#{filter.subject}"></span>
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
@@ -94,7 +99,7 @@
                     <p>
                         <a class="btn btn-light"
                            th:with="direction=${blogPage.sort.getOrderFor('author')?.direction}"
-                           th:href="@{/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
+                           th:href="@{/public/blogs/list(sort='author,' + ${direction?.name() eq 'ASC' ? 'DESC' : 'ASC'}+ ',ignorecase' )}">
                             <span th:text="#{filter.author}"></span>
                             <i class="fa-solid"
                                th:classappend="${direction?.name() eq 'ASC' ? 'fa-arrow-down-z-a' : 'fa-arrow-up-a-z'}"
@@ -111,7 +116,7 @@
                             <h5 class="card-title">
                                 <i>
                                     <a th:with="subject=${blog.getSubject()}"
-                                       th:href="@{/blogs/{blogId}/view(blogId=${blog.getBlogId()})}"
+                                       th:href="@{/public/blogs/{blogId}/view(blogId=${blog.getBlogId()})}"
                                        th:text="${subject.length() > 40} ? ${subject.substring(0, 40)} + ' ...' : ${subject}"
                                     >
                                     </a>
@@ -136,7 +141,7 @@
                             <div class="card-bottom absolute">
                                 <div class="left-side">
                                     <div class="create-date" style="justify-self: start;">
-                                        <i th:text="${blog.getAuthor()}"></i>
+                                        <i th:text="${blog.getUserDto().getFullName()}"></i>
                                         <p th:text="${blog.getCreateDate()}"></p>
                                     </div>
                                 </div>

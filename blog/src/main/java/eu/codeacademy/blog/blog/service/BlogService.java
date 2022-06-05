@@ -5,6 +5,9 @@ import eu.codeacademy.blog.blog.entity.Blog;
 import eu.codeacademy.blog.blog.exception.BlogNotFoundException;
 import eu.codeacademy.blog.blog.mapper.BlogMapper;
 import eu.codeacademy.blog.blog.repository.BlogRepository;
+import eu.codeacademy.blog.user.dto.UserDto;
+import eu.codeacademy.blog.user.entity.User;
+import eu.codeacademy.blog.user.service.UserService;
 import eu.codeacademy.blog.utils.CurrentDate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,8 +27,10 @@ public class BlogService {
     private final BlogRepository blogRepository;
     private final BlogMapper mapper;
     private final CurrentDate currentDate;
+    private final UserService userService;
 
-    public void addBlog(BlogDto blogDto) {
+    public void addBlog(BlogDto blogDto, UserDto userDto) {
+        Optional<User> userOptional = userService.getUserEntityByUserName(userDto.getEmail());
         blogRepository.save(Blog.builder()
                 .blogId(UUID.randomUUID())
                 .subject(blogDto.getSubject())
@@ -35,6 +40,7 @@ public class BlogService {
                 .deleteDate(blogDto.getDeleteDate())
                 .author(blogDto.getAuthor())
                 .status(blogDto.getStatus())
+                .user(userOptional.get())
                 .build());
     }
 

@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.blog.dto;
 
 import eu.codeacademy.blog.comment.entity.Comment;
+import eu.codeacademy.blog.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,4 +28,5 @@ public class BlogDto {
     private String author;
     private String status;
     private Set<Comment> comments;
+    private UserDto userDto;
 }
