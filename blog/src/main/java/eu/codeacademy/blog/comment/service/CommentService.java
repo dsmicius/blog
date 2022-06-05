@@ -9,6 +9,7 @@ import eu.codeacademy.blog.comment.exception.CommentDeleteException;
 import eu.codeacademy.blog.comment.mapper.CommentMapper;
 import eu.codeacademy.blog.comment.repository.CommentRepository;
 import eu.codeacademy.blog.user.dto.UserDto;
+import eu.codeacademy.blog.user.entity.Authority;
 import eu.codeacademy.blog.user.entity.User;
 import eu.codeacademy.blog.user.service.UserService;
 import eu.codeacademy.blog.utils.CurrentDate;
@@ -61,7 +62,8 @@ public class CommentService {
     public void deleteComment(UUID commentId, UserDto userDto) throws CommentDeleteException {
         Optional<Comment> comment = commentRepository.findCommentByCommentId(commentId);
         Optional<User> userOptional = userService.getUserEntityByUserName(userDto.getEmail());
-        if (comment.isPresent() && userOptional.isPresent() && isUserEquals(comment, userOptional)) {
+        Optional<Authority> authority = userOptional.get().getAuthorities().stream().filter(a -> a.getName().equals("ADMIN")).findAny();
+        if (comment.isPresent() && userOptional.isPresent() && (isUserEquals(comment, userOptional) || authority.isPresent())){
             commentRepository.delete(comment.get());
         }else {
             throw new CommentDeleteException("delete.comment.message.error");
