@@ -62,8 +62,8 @@ public class CommentService {
     public void deleteComment(UUID commentId, UserDto userDto) throws CommentDeleteException {
         Optional<Comment> comment = commentRepository.findCommentByCommentId(commentId);
         Optional<User> userOptional = userService.getUserEntityByUserName(userDto.getEmail());
-        Optional<Authority> authority = userOptional.get().getAuthorities().stream().filter(a -> a.getName().equals("ADMIN")).findAny();
-        if (comment.isPresent() && userOptional.isPresent() && (isUserEquals(comment, userOptional) || authority.isPresent())){
+        Optional<Authority> authorityAdmin = userOptional.get().getAuthorities().stream().filter(a -> a.getName().equals("ADMIN")).findAny();
+        if (comment.isPresent() && userOptional.isPresent() && (isUserEquals(comment, userOptional) || authorityAdmin.isPresent())){
             commentRepository.delete(comment.get());
         }else {
             throw new CommentDeleteException("delete.comment.message.error");
