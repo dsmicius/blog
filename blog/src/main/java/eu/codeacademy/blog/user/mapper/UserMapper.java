@@ -33,6 +33,7 @@ public class UserMapper {
     }
 
     private Function<Authority, String> getAuthority() {
+
         return authority -> "ROLE_" + authority.getName();
     }
 }

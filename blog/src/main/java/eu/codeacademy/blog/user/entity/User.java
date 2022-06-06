@@ -10,7 +10,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @Entity
 @Table(name = "users")
