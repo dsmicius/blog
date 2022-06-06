@@ -134,6 +134,7 @@
                                th:with="description=${blog.getDescription()}"
                                th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}"></p>
                             <div sec:authorize="hasRole('ADMIN')" class="buttons absolute">
+
                                 <form method="GET" th:action="@{/blogs/update}">
                                     <input type="hidden" name="blogId" th:value="${blog.getBlogId()}">
                                     <button class="btn btn-primary btn-xl" th:text="#{blogs.edit-button}"></button>
@@ -147,12 +148,14 @@
                             </div>
 
                             <div class="card-bottom absolute">
+
                                 <div class="left-side">
                                     <div class="create-date" style="justify-self: start;">
                                         <i th:text="${blog.getUserDto().getFullName()}"></i>
                                         <p th:text="${blog.getCreateDate()}"></p>
                                     </div>
                                 </div>
+
                                 <div class="center">
                                     <form method="POST"
                                           th:action="@{/public/favorite/{blogId}(blogId=${blog.getBlogId()})}">
@@ -161,6 +164,7 @@
                                         </button>
                                     </form>
                                 </div>
+
                                 <div class="right-side">
                                     <i th:text="#{comments.totalComments} + ': ' + ${blog.getComments().size()}"></i>
                                     <br>
@@ -169,6 +173,7 @@
                                         <button class="btn btn-link btn-comment" th:text="#{comment.add}"></button>
                                     </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
