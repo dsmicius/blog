@@ -130,9 +130,19 @@
                                     </a>
                                 </i>
                             </h5>
-                            <p class="card-text"
-                               th:with="description=${blog.getDescription()}"
-                               th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}"></p>
+                            <div sec:authorize="not hasRole('ADMIN')">
+                                <p class="card-text"
+                                   th:with="description=${blog.getDescription()}"
+                                   th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}">
+                                </p>
+                            </div>
+                            <div sec:authorize="hasRole('ADMIN')">
+                                <p class="card-text"
+                                   th:with="description=${blog.getDescription()}"
+                                   th:text="${description.length() > 150} ? ${description.substring(0, 150)} + ' ...' : ${description}">
+                                </p>
+                            </div>
+
                             <div sec:authorize="hasRole('ADMIN')" class="buttons absolute">
 
                                 <form method="GET" th:action="@{/blogs/update}">
