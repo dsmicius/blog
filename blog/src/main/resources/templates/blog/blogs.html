@@ -128,18 +128,19 @@
                                        th:text="${subject.length() > 40} ? ${subject.substring(0, 40)} + ' ...' : ${subject}"
                                     >
                                     </a>
+                                    <hr>
                                 </i>
                             </h5>
                             <div sec:authorize="not hasRole('ADMIN')">
                                 <p class="card-text"
                                    th:with="description=${blog.getDescription()}"
-                                   th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}">
+                                   th:text="${description.length() > 350} ? ${description.substring(0, 350)} + ' ...' : ${description}">
                                 </p>
                             </div>
                             <div sec:authorize="hasRole('ADMIN')">
                                 <p class="card-text"
                                    th:with="description=${blog.getDescription()}"
-                                   th:text="${description.length() > 150} ? ${description.substring(0, 150)} + ' ...' : ${description}">
+                                   th:text="${description.length() > 240} ? ${description.substring(0, 240)} + ' ...' : ${description}">
                                 </p>
                             </div>
 
