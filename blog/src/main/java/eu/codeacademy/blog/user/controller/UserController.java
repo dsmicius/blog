@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -21,6 +22,7 @@ public class UserController {
 
     private static final String REGISTER_ROOT_PATH = "/users";
     private static final String UPDATE_PATH = REGISTER_ROOT_PATH + "/update";
+    private static final String DELETE_PATH = REGISTER_ROOT_PATH + "/delete";
     private static final String REGISTER_PATH = "/public" + REGISTER_ROOT_PATH + "/register";
     private final UserValidator validator;
     private final UserRegistrationService userRegistrationService;
@@ -62,4 +64,12 @@ public class UserController {
             userService.updateUser(userRoleDto);
         return "user/userUpdate";
     }
+
+    @PostMapping(DELETE_PATH)
+    public String delete(@RequestParam String email, RedirectAttributes redirectAttributes) {
+        userService.deleteUser(email);
+        redirectAttributes.addFlashAttribute("messageSuccess", "User deleted success");
+        return "redirect:" + REGISTER_ROOT_PATH;
+    }
+
 }

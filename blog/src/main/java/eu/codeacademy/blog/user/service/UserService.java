@@ -53,8 +53,11 @@ public class UserService implements UserDetailsService {
 
             userRepository.save(user);
         }
-
-
-
+    }
+    public void deleteUser(String email) {
+        Optional<User> optionalUser = userRepository.findUserByEmailWithAuthorities(email);
+        if (optionalUser.isPresent()) {
+            userRepository.delete(optionalUser.get());
+        }
     }
 }

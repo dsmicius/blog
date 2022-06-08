@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="menu-bar">
-    <div th:replace="fragments/layout :: menubar"></div>
+    <div th:replace="fragments/layout :: menubar(rootPath='comments')"></div>
 </div>
 <div class="blog-update container">
     <h3 th:text="#{comment.create}"></h3>
