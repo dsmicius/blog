@@ -5,6 +5,10 @@
 <head th:replace="fragments/layout :: head(#{create.blog})"></head>
 
 <body>
+<div class="menu-bar">
+    <div th:replace="fragments/layout :: menubar(rootPath='blogs')"></div>
+</div>
+
 <div class="blog-update container">
     <h3 th:text="#{create.blog}"></h3>
     <form action="" method="post" th:object="${blog}" th:action="@{/blogs}">

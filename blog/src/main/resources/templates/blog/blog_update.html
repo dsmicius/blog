@@ -6,7 +6,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <div class="menu-bar">
-    <div th:replace="fragments/layout :: menubar"></div>
+    <div th:object="${blog}" th:replace="fragments/layout :: menubar(rootPath='blogs/update?blogId='+${blog.getBlogId()}+'&')"></div>
 </div>
 <div class="blog-update container">
     <!--    <h3 th:text="#{update.blog}"></h3>-->

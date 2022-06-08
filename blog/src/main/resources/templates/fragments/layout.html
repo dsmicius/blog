@@ -44,11 +44,6 @@
 
                     <div sec:authorize="hasRole('ADMIN')">
                         <li th:replace="this :: settings"></li>
-<!--                        <select class="nav-link dropdown btn-light" id="settingsSelector">-->
-<!--                            <option value="" th:text="'Settings'"></option>-->
-<!--                            <option value="USERS" th:text="'Users'"></option>-->
-<!--                            <option value="ROLES" th:text="'Roles'"></option>-->
-<!--                        </select>-->
                     </div>
                 </div>
             </ul>

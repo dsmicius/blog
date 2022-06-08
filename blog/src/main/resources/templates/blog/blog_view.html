@@ -6,7 +6,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 <div class="menu-bar">
-    <div th:replace="fragments/layout :: menubar"></div>
+    <div th:object="${blog}" th:replace="fragments/layout :: menubar(rootPath='public/blogs/'+${blog.getBlogId()}+'/view')"></div>
 </div>
 
 <div class="blog-view container">
