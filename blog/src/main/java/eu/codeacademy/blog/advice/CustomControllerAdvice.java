@@ -1,4 +1,4 @@
-package eu.codeacademy.blog;
+package eu.codeacademy.blog.advice;
 
 import eu.codeacademy.blog.blog.exception.BlogNotFoundException;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -16,8 +16,8 @@ import java.util.Date;
 public class CustomControllerAdvice {
 
     @ExceptionHandler(BlogNotFoundException.class)
-    public String productNotFound(BlogNotFoundException e, Model model) {
-        model.addAttribute("productId", e.getBlogId());
+    public String blogNotFound(BlogNotFoundException e, Model model) {
+        model.addAttribute("blogId", e.getBlogId());
         return "blog/error/blogNotFound";
     }
 

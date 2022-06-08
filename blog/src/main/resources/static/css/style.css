@@ -8,7 +8,7 @@
     display: grid;
     grid-template-areas:
         'menu-area menu-area menu-area menu-area menu-area menu-area'
-        'filter-area filter-area content-area content-area content-area content-area'
+        'filter-area content-area content-area content-area content-area content-area'
         'total-elements-area total-elements-area total-elements-area total-elements-area total-elements-area total-elements-area'
         'page-bar-area page-bar-area page-bar-area page-bar-area page-bar-area page-bar-area'
         'footer-area footer-area footer-area footer-area footer-area footer-area';
@@ -99,4 +99,8 @@ a {
 
 .btn-comment {
     font-size: 10px;
+}
+
+.footer {
+    text-align: center;
 }

@@ -14,10 +14,11 @@ import java.util.UUID;
 @Builder
 public class BlogDto {
     private UUID blogId;
-    @NotBlank
+    @NotBlank(message = "Subject is required")
     @Size(
             min = 3,
-            max = 100
+            max = 50,
+            message = "Minimum 3"
     )
     private String subject;
     @NotBlank
