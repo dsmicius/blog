@@ -52,8 +52,7 @@
                         sec:authentication="principal.fullName"></span></i>
             </div>
             <form class="d-flex" method="GET" th:action="@{/public/blog-finder}">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                       name="blogSubject">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="subject">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div sec:authorize="!isAuthenticated()">

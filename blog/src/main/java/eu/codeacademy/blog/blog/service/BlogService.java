@@ -90,4 +90,13 @@ public class BlogService {
         Optional<Blog> blog = blogRepository.findByBlogId(id);
         return blog.get();
     }
+
+    public Page<BlogDto> getBlogBySubjectPageable(String subject, Pageable pageable) {
+        return blogRepository.findBlogsBySubjectIsLikeIgnoreCase(convertToLikeResult(subject), pageable)
+                .map(mapper::mapTo);
+    }
+
+    private  String convertToLikeResult(String value) {
+        return '%' + value + '%';
+    }
 }

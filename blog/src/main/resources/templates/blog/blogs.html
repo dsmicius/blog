@@ -20,6 +20,7 @@
         <div class="menu-bar">
             <div th:replace="fragments/layout :: menubar(rootPath='public/blogs/list')"></div>
         </div>
+        <div th:with="urlRootPath=${#httpServletRequest.requestURI}">
         <div class="content" th:if="${blogPage.hasContent()}">
             <div class="filter">
                 <div class="filter-header">
@@ -133,7 +134,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
         <div class="total-elements">
             <h2 class="d-flex justify-content-center" th:if="${not blogPage.hasContent()}"
                 th:text="'List is Empty'"></h2>
@@ -146,27 +147,30 @@
                 <ul class="pagination"
                     th:with="
                     orderParam=${blogPage.sort.iterator().hasNext() ? blogPage.sort.iterator().next : null},
-                    sortParam=${orderParam.property + ',' + orderParam.direction + ',ignorecase'}">
+                    sortParam=${orderParam ne null ? orderParam.property + ',' + orderParam.direction + ',ignorecase' : null}">
                     <li class="page-item"
                         th:classappend="${blogPage.hasPrevious() ? '' : 'disabled'}">
                         <a class="page-link"
-                           th:href="@{/public/blogs/list(page=${blogPage.number} - 1,sort=${sortParam})}"
-                           th:text="Previous"></a>
+                           th:href="@{*{urlRootPath}(page=${blogPage.number} - 1,sort=${sortParam})}"
+                           th:text="Previous"
+                        ></a>
                     </li>
 
                     <li class="page-item"
                         th:each="pageNumber: ${#numbers.sequence(0, blogPage.totalPages - 1)}"
                         th:classappend="${pageNumber == blogPage.number ? 'active' : ''}">
                         <a class="page-link"
-                           th:href="@{/public/blogs/list(page=${pageNumber},sort=${sortParam})}"
+                           th:href="@{*{urlRootPath}(page=${pageNumber},sort=${sortParam})}"
                            th:text="${pageNumber + 1}"></a>
                     </li>
 
                     <li class="page-item"
-                        th:classappend="${blogPage.hasNext() ? '' : 'disabled'}">
+                        th:classappend="${!blogPage.hasNext()} ? 'disabled'"
+                    >
                         <a class="page-link"
-                           th:href="@{/public/blogs/list(page=${blogPage.number} + 1,sort=${sortParam})}"
-                           th:text="Next"></a>
+                           th:href="@{*{urlRootPath}(page=${blogPage.number} + 1,sort=${sortParam})}"
+                           th:text="Next"
+                        ></a>
                     </li>
                 </ul>
             </nav>
