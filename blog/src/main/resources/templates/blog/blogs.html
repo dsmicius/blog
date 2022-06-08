@@ -142,7 +142,7 @@
             <br>
         </div>
 
-        <div class="page-bar">
+        <div th:if="${blogPage.hasContent()}" class="page-bar">
             <nav class="pages d-flex justify-content-center">
                 <ul class="pagination"
                     th:with="
