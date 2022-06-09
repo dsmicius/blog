@@ -21,8 +21,14 @@ public class BlogDto {
             message = "Minimum 3"
     )
     private String subject;
-    @NotBlank
+
+    @NotBlank(message = "Description is required")
+    @Size(
+            min = 3,
+            message = "Minimum 3"
+    )
     private String description;
+
     private String createDate;
     private String updateDate;
     private String deleteDate;

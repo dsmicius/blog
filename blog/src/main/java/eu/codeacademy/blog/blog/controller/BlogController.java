@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,15 +40,21 @@ public class BlogController {
     private final CommentService commentService;
 
     @GetMapping(BLOG_ROOT_PATH)
-    public String openCreateBlogForm(Model model) {
+    public String openCreateBlogForm(Model model, String message) {
         model.addAttribute("blog", BlogDto.builder().build());
+        model.addAttribute("message", messageService.getMessage(message));
         return "blog/blog";
     }
 
     @PostMapping(BLOG_ROOT_PATH)
-    public String createBlog(@Valid BlogDto blog,
+    public String createBlog(Model model, @Valid BlogDto blog,
+                             BindingResult errors,
                              RedirectAttributes redirectAttributes,
                              UsernamePasswordAuthenticationToken principal) {
+        if (errors.hasErrors()) {
+            model.addAttribute("blog", BlogDto.builder().subject("Error").build());
+            return "blog/blog";
+        }
         if (principal.getPrincipal() instanceof UserDetails) {
             UserRoleDto userDto = (UserRoleDto) principal.getPrincipal();
 
