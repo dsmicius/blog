@@ -1,13 +1,3 @@
--- DROP TABLE IF EXISTS COMMENT;
---
--- DROP TABLE IF EXISTS BLOG;
---
--- DROP TABLE IF EXISTS users_authorities;
---
--- DROP TABLE IF EXISTS authority;
---
--- DROP TABLE IF EXISTS users_authorities;
-
 CREATE TABLE IF NOT EXISTS BLOG
 (
     id          BIGSERIAL PRIMARY KEY,
