@@ -12,7 +12,11 @@
 <div class="blog-update container">
     <h3 th:text="#{create.blog}"></h3>
     <form action="" method="post" th:object="${blog}" th:action="@{/blogs}">
-
+<!--        <div class="mb-3">-->
+<!--            <ul class="error-block" th:if="${#fields.hasErrors()}">-->
+<!--                <li th:each="error: ${#fields.errors()}" th:text="${error}"></li>-->
+<!--            </ul>-->
+<!--        </div>-->
         <div class="form-floating">
         <textarea
                 class="form-control"
@@ -23,6 +27,7 @@
                 id="floatingSubjectarea"
                 th:field="*{subject}"
                 th:errorclass="hasError"
+                th:classappend="${#fields.hasErrors('subject')} ? 'is-invalid'"
                 style="height: 50%; width: 50%"
         ></textarea>
             <label for="floatingSubjectarea" th:text="#{create.subject}"></label>
@@ -40,9 +45,11 @@
                 cols="60"
                 id="floatingTextarea"
                 th:field="*{description}"
+                th:errorclass="hasError"
                 style="height: 50%; width: 50%"
         ></textarea>
             <label for="floatingTextarea" th:text="#{create.description}"></label>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="hasError"></span>
         </div>
 
         <br>

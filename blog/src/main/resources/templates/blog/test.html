@@ -4,12 +4,10 @@
       lang="en">
 <head th:replace="fragments/layout :: head(#{blogs.title})"></head>
 <body>
-<div th:each="blog: ${blogPage}">
-  <a th:with="subject=${blog.getSubject()}"
-     th:href="@{/public/blogs/{blogId}/view(blogId=${blog.getBlogId()})}"
-     th:text="${subject.length() > 40} ? ${subject.substring(0, 40)} + ' ...' : ${subject}">
-  </a>
-
+<div class="mb-3">
+  <ul class="error-block" th:if="${#fields.hasErrors()}">
+    <li th:each="error: ${#fields.errors()}" th:text="${error}"></li>
+  </ul>
 </div>
 </body>
 </html>
