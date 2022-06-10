@@ -11,8 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,18 +49,13 @@ public class BlogController {
     public String createBlog(Model model, @Valid BlogDto blog,
                              BindingResult errors,
                              RedirectAttributes redirectAttributes,
-                             UsernamePasswordAuthenticationToken principal) {
+                             @AuthenticationPrincipal UserRoleDto userDto) {
         if (errors.hasErrors()) {
             model.addAttribute("blog", BlogDto.builder().subject("Error").build());
             return "blog/blog";
         }
-        if (principal.getPrincipal() instanceof UserDetails) {
-            UserRoleDto userDto = (UserRoleDto) principal.getPrincipal();
-
-            blogService.addBlog(blog, userDto.getUser());
-            redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
-            return "redirect:/public/blogs/list";
-        }
+        blogService.addBlog(blog, userDto.getUser());
+        redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
         return "redirect:/public/blogs/list";
     }
 
