@@ -44,7 +44,7 @@ public class UserController {
 
         userRegistrationService.register(userDto);
 
-        return "redirect:/users";
+        return "redirect:/login";
     }
 
     @GetMapping(REGISTER_ROOT_PATH)

@@ -7,8 +7,7 @@ import eu.codeacademy.blog.comment.exception.CommentDeleteException;
 import eu.codeacademy.blog.comment.service.CommentService;
 import eu.codeacademy.blog.user.dto.UserRoleDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class CommentController {
     private final BlogService blogService;
     private final CommentService commentService;
 
-    @GetMapping()
+    @GetMapping
     public String openCommentForm(Model model, @RequestParam UUID blogId) {
         BlogDto blogDto = blogService.getBlogByUUID(blogId);
         model.addAttribute("comment", CommentDto.builder().build());
@@ -40,32 +39,21 @@ public class CommentController {
                                 @RequestParam UUID blogId,
                                 CommentDto commentDto,
                                 RedirectAttributes redirectAttributes,
-                                UsernamePasswordAuthenticationToken principal) {
-        if (principal.getPrincipal() instanceof UserDetails) {
-            UserRoleDto userDto = (UserRoleDto) principal.getPrincipal();
-
-            BlogDto blog = blogService.getBlogByUUID(blogId);
-            commentService.addComment(commentDto, blog, userDto.getUser());
-            model.addAttribute("comment", CommentDto.builder().build());
-            redirectAttributes.addFlashAttribute("messageSuccess", "create.comment.message.success");
-            return "redirect:/public/blogs/" + blogId + "/view";
-        }
-        redirectAttributes.addFlashAttribute("messageSuccess", "create.comment.message.error");
-        return "redirect:/public/blogs/list";
+                                @AuthenticationPrincipal UserRoleDto userDto) {
+        BlogDto blog = blogService.getBlogByUUID(blogId);
+        commentService.addComment(commentDto, blog, userDto.getUser());
+        model.addAttribute("comment", CommentDto.builder().build());
+        redirectAttributes.addFlashAttribute("messageSuccess", "create.comment.message.success");
+        return "redirect:/public/blogs/" + blogId + "/view";
     }
 
     @PostMapping("/delete")
-    public String deleteComment(@RequestParam UUID commentId,
+    public String deleteComment(@RequestParam() UUID commentId,
                                 RedirectAttributes redirectAttributes,
-                                UsernamePasswordAuthenticationToken principal) {
+                                @AuthenticationPrincipal UserRoleDto userDto) {
         try {
-            if (principal.getPrincipal() instanceof UserDetails) {
-                UserRoleDto userDto = (UserRoleDto) principal.getPrincipal();
-                commentService.deleteComment(commentId, userDto.getUser());
-                redirectAttributes.addFlashAttribute("messageSuccess", "delete.comment.message.success");
-                return "redirect:/public/blogs/list";
-            }
-            redirectAttributes.addFlashAttribute("messageError", "delete.comment.message.error");
+            commentService.deleteComment(commentId, userDto.getUser());
+            redirectAttributes.addFlashAttribute("messageSuccess", "delete.comment.message.success");
             return "redirect:/public/blogs/list";
         } catch (CommentDeleteException e) {
             redirectAttributes.addFlashAttribute("messageError", e.getMessage());

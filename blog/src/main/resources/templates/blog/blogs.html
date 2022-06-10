@@ -77,7 +77,7 @@
                             <div sec:authorize="not hasRole('ADMIN')">
                                 <p class="card-text"
                                    th:with="description=${blog.getDescription()}"
-                                   th:text="${description.length() > 350} ? ${description.substring(0, 350)} + ' ...' : ${description}">
+                                   th:text="${description.length() > 300} ? ${description.substring(0, 300)} + ' ...' : ${description}">
                                 </p>
                             </div>
                             <div sec:authorize="hasRole('ADMIN')">
