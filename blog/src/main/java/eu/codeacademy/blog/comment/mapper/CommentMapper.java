@@ -16,7 +16,6 @@ public class CommentMapper {
                 .updateDate(comment.getUpdateDate())
                 .deleteDate(comment.getDeleteDate())
                 .author(comment.getUser().getName() + " " + comment.getUser().getSurname())
-                .blog(comment.getBlog())
                 .userDto(UserDto.builder()
                         .name(comment.getUser().getName())
                         .surname(comment.getUser().getSurname())
