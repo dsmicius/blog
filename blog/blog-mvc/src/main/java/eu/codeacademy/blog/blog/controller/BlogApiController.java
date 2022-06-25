@@ -18,15 +18,9 @@ public class BlogApiController {
 
     private final BlogService blogService;
 
-    @GetMapping(value = "/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public List<BlogDto> getJsonBlogs() {
-        return blogService.getBlogs();
-    }
-
-    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
-    @ResponseBody
-    public List<BlogDto> getXmlBlogs() {
         return blogService.getBlogs();
     }
 }
