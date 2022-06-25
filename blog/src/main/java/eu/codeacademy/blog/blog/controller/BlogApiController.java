@@ -3,6 +3,7 @@ package eu.codeacademy.blog.blog.controller;
 import eu.codeacademy.blog.blog.dto.BlogDto;
 import eu.codeacademy.blog.blog.service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,15 @@ public class BlogApiController {
 
     private final BlogService blogService;
 
-    @GetMapping
+    @GetMapping(value = "/json", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<BlogDto> getBlogs() {
+    public List<BlogDto> getJsonBlogs() {
+        return blogService.getBlogs();
+    }
+
+    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
+    @ResponseBody
+    public List<BlogDto> getXmlBlogs() {
         return blogService.getBlogs();
     }
 }
