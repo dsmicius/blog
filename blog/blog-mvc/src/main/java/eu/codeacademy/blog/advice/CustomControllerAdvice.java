@@ -1,6 +1,6 @@
 package eu.codeacademy.blog.advice;
 
-import eu.codeacademy.blog.blog.exception.BlogNotFoundException;
+import eu.codeacademy.blog.common.blog.exception.BlogNotFoundException;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
