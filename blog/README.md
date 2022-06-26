@@ -14,6 +14,10 @@ By default, application will be run with h2 DB
 To use postgreSQL DB please add to profile - pg
 
 
+## Swagger API documentation link
+http://localhost:8888/swagger-ui/index.html
+
+
 # Docker
 
 

@@ -26,7 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/public/**","/","/api/**").permitAll()
+                .antMatchers("/public/**","/","/api/**",
+                        "/swagger-ui/**",
+                        "/swagger-resources/**",
+                        "/v3/api-docs/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
