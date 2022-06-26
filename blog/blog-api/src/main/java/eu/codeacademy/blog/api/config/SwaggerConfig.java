@@ -2,6 +2,7 @@ package eu.codeacademy.blog.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -15,7 +16,10 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
-                .apiInfo(getInfo());
+                .apiInfo(getInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("eu.codeacademy.blog.api"))
+                .build();
     }
 
     private static ApiInfo getInfo() {
