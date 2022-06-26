@@ -57,7 +57,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div sec:authorize="!isAuthenticated()">
-                <a class="btn btn-success" aria-current="page" th:href="@{/login}"
+                <a class="btn btn-success" aria-current="page" th:href="@{/templates/login}"
                    th:text="#{nav.login}"></a>
             </div>
             <div sec:authorize="isAuthenticated()">
@@ -108,7 +108,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div sec:authorize="!isAuthenticated()">
-                <a class="btn btn-success" aria-current="page" th:href="@{/login}"
+                <a class="btn btn-success" aria-current="page" th:href="@{/templates/login}"
                    th:text="#{nav.login}"></a>
             </div>
             <div sec:authorize="isAuthenticated()">
