@@ -3,6 +3,7 @@ package eu.codeacademy.blog.api.controller;
 import eu.codeacademy.blog.api.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,9 @@ public class FileController {
     }
 
     @GetMapping("/api/file/download")
-    public Resource getFileByFileName(@RequestParam String fileName) {
-        return fileService.getFile(fileName);
+    public ResponseEntity<Resource> getFileByFileName(@RequestParam String fileName) {
+        return ResponseEntity.ok()
+                .contentType(fileService.getFileMediaType(fileName))
+                .body(fileService.getFile(fileName));
     }
 }
