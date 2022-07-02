@@ -1,5 +1,6 @@
 package eu.codeacademy.blog.api.controller;
 
+import eu.codeacademy.blog.api.dto.FileResponse;
 import eu.codeacademy.blog.api.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,9 +34,9 @@ public class FileController {
             @ApiResponse(code = 401, message = "Prisijunkite jei norit gauti atsakyma")
     })
     @PostMapping(UPLOAD_PATH)
-    public void saveFile(@RequestParam MultipartFile file) {
+    public FileResponse saveFile(@RequestParam MultipartFile file) {
 
-        fileService.saveFile(file);
+        return fileService.saveFile(file);
     }
 
     @ApiOperation(value = "Get file by name", httpMethod = "GET")
