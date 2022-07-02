@@ -32,7 +32,6 @@ public class UserDto {
     @Size(min = 6, max = 255)
     private String repeatedPassword;
 
-    @NotBlank
     private String zipCode;
 
     @PhoneNumber(type = PhoneType.LOCAL)

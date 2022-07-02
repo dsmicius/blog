@@ -28,7 +28,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BlogController {
 
-    //TODO: perkelti i viena interface visus root pathus
     private static final String BLOG_ROOT_PATH = "/blogs";
     private static final String BLOG_LIST_PATH = "/public" + BLOG_ROOT_PATH + "/list";
     private static final String BLOG_UPDATE_PATH = BLOG_ROOT_PATH + "/update";
@@ -54,7 +53,7 @@ public class BlogController {
             model.addAttribute("blog", BlogDto.builder().subject("Error").build());
             return "blog/blog";
         }
-        blogService.addBlog(blog, userDto.getUser());
+        blogService.addBlog(blog, userDto.getUser().getEmail());
         redirectAttributes.addFlashAttribute("messageSuccess", "create.blog.message.success");
         return "redirect:/public/blogs/list";
     }

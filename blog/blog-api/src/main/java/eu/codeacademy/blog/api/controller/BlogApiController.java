@@ -1,6 +1,7 @@
 package eu.codeacademy.blog.api.controller;
 
 import eu.codeacademy.blog.api.dto.BlogsResponse;
+import eu.codeacademy.blog.common.blog.dto.BlogDto;
 import eu.codeacademy.blog.common.blog.service.BlogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,5 +61,11 @@ public class BlogApiController {
             path = UUID_PATH)
     public void deleteBlog(@PathVariable("uuid") UUID blogId) {
         blogService.deleteBlog(blogId);
+    }
+
+    // TODO: reikia kazka sugalvoti del requestBody perdavimo, nes negalima perduoti dvieju objektu. Vadinasi Useris turi ateiti gal kaip parametras?
+    @PostMapping
+    public void createBlog(@Valid @RequestBody BlogDto blogDto, @RequestParam String email) {
+        blogService.addBlog(blogDto, email);
     }
 }
