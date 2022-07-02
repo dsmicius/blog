@@ -1,15 +1,11 @@
 server:
   port: 8888
-  servlet:
-#    context-path: /api
-    session:
-      tracking-modes: cookie
 spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   main:
-    banner-mode: console
+    banner-mode: off
   datasource:
     url: jdbc:h2:mem:blogdb
     driver-class-name: org.h2.Driver
@@ -37,10 +33,3 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
-logging:
-  level:
-    eu:
-      codeacademy:
-        blog:
-          config: DEBUG
-          filter: TRACE
