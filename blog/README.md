@@ -15,7 +15,7 @@ To use postgreSQL DB please add to profile - pg
 
 
 ## Swagger API documentation link
-http://localhost:8888/swagger-ui/index.html
+http://localhost:8888/api/swagger-ui/index.html
 
 
 # Docker

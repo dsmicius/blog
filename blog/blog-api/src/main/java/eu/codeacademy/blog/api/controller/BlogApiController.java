@@ -9,12 +9,16 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/blogs")
+@RequestMapping("/blogs")
 @Api(tags = "Blog Controller")
 public class BlogApiController {
 
@@ -32,6 +36,24 @@ public class BlogApiController {
     }
     )
     public BlogsResponse getBlogs() {
+
         return BlogsResponse.builder().blogs(blogService.getBlogs()).build();
     }
+
+    @GetMapping(
+            path = "/{uuid}",
+            produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ApiOperation(value = "Get Blog by uuid")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Kai sėkmingai gražina Blog įrašą"),
+            @ApiResponse(code = 401, message = "Reikalauja prisijungimo gaunant Blog įrašą"),
+            @ApiResponse(code = 403, message = "Neturite reikalingų teisių gauti Blog įrašą")
+    }
+    )
+    public BlogsResponse getBlogs(@PathVariable("uuid") UUID uuid) {
+        return BlogsResponse.builder()
+                .blogs(List.of(blogService.getBlogByUUID(uuid)))
+                .build();
+    }
+
 }
