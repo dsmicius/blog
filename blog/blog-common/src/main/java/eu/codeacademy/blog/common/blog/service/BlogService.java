@@ -3,7 +3,6 @@ package eu.codeacademy.blog.common.blog.service;
 import eu.codeacademy.blog.common.blog.dto.BlogDto;
 import eu.codeacademy.blog.common.blog.exception.BlogNotFoundException;
 import eu.codeacademy.blog.common.blog.mapper.BlogMapper;
-import eu.codeacademy.blog.common.user.dto.UserDto;
 import eu.codeacademy.blog.common.user.service.UserService;
 import eu.codeacademy.blog.common.utils.CurrentDate;
 import eu.codeacademy.blog.jpa.blog.entity.Blog;
@@ -29,8 +28,8 @@ public class BlogService {
     private final CurrentDate currentDate;
     private final UserService userService;
 
-    public void addBlog(BlogDto blogDto, UserDto userDto) {
-        Optional<User> userOptional = userService.getUserEntityByUserName(userDto.getEmail());
+    public void addBlog(BlogDto blogDto, String email) {
+        Optional<User> userOptional = userService.getUserEntityByUserName(email);
         blogRepository.save(Blog.builder()
                 .blogId(UUID.randomUUID())
                 .subject(blogDto.getSubject())

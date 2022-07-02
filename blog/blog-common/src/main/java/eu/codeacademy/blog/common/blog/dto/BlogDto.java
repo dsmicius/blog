@@ -14,6 +14,7 @@ import java.util.UUID;
 @Builder
 public class BlogDto {
     private UUID blogId;
+
     @NotBlank(message = "Subject is required")
     @Size(
             min = 3,
