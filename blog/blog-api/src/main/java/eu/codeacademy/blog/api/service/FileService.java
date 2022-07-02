@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 
 @Service
 @Slf4j
@@ -18,12 +19,19 @@ public class FileService {
     public void saveFile(MultipartFile file) {
         createDirectory();
         try {
-            Path filePathWithFileName = fileLocation.resolve(file.getOriginalFilename());
+            Path filePathWithFileName = fileLocation.resolve(getUniqFileName(file));
             Files.copy(file.getInputStream(), filePathWithFileName, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             log.error("Cannot create file", e);
             e.printStackTrace();
         }
+    }
+
+    private String getUniqFileName(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        int nanoDate = LocalDateTime.now().getNano();
+
+        return String.format("%s_%s", nanoDate, fileName);
     }
 
     private void createDirectory() {
