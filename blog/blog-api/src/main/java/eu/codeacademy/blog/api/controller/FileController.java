@@ -18,14 +18,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(tags = "File Controller")
 public class FileController {
 
+    private static final String FILE_ROOT_PATH = "/api/file";
+    private static final String UPLOAD_PATH = FILE_ROOT_PATH + "/upload";
+    private static final String DOWNLOAD_PATH = FILE_ROOT_PATH + "/download";
     private final FileService fileService;
 
-    @PostMapping("/file/upload")
+    @PostMapping(UPLOAD_PATH)
     public void saveFile(@RequestParam MultipartFile file) {
         fileService.saveFile(file);
     }
 
-    @GetMapping("/file/download")
+    @GetMapping(DOWNLOAD_PATH)
     public ResponseEntity<Resource> getFileByFileName(@RequestParam String fileName) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
