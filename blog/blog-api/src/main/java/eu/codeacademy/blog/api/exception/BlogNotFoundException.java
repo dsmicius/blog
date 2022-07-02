@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.common.blog.exception;
+package eu.codeacademy.blog.api.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

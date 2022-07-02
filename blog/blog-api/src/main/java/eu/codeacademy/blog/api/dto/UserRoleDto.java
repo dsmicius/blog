@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.common.user.dto;
+package eu.codeacademy.blog.api.dto;
 
 import lombok.Builder;
 import lombok.Getter;

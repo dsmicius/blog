@@ -1,6 +1,7 @@
 dependencies {
-//    implementation project(":blog-mvc")
+
     implementation project(":blog-api")
+    implementation project(":security:security-basic")
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 }

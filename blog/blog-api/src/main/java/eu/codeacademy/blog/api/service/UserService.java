@@ -1,7 +1,7 @@
-package eu.codeacademy.blog.common.user.service;
+package eu.codeacademy.blog.api.service;
 
-import eu.codeacademy.blog.common.user.dto.UserRoleDto;
-import eu.codeacademy.blog.common.user.mapper.UserMapper;
+import eu.codeacademy.blog.api.dto.UserRoleDto;
+import eu.codeacademy.blog.api.mapper.UserMapper;
 import eu.codeacademy.blog.jpa.user.entity.User;
 import eu.codeacademy.blog.jpa.user.repository.AuthorityRepository;
 import eu.codeacademy.blog.jpa.user.repository.UserRepository;
@@ -41,7 +41,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void updateUser(UserRoleDto userRoleDto) {
-       Optional<User> userOptional = userRepository.findUserByEmailWithAuthorities(userRoleDto.getUser().getEmail());
+        Optional<User> userOptional = userRepository.findUserByEmailWithAuthorities(userRoleDto.getUser().getEmail());
         if(userOptional.isPresent()) {
             User user = userOptional.get().toBuilder()
                     .name(userRoleDto.getUser().getName())

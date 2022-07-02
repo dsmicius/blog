@@ -1,10 +1,9 @@
-package eu.codeacademy.blog.common.blog.service;
+package eu.codeacademy.blog.api.service;
 
-import eu.codeacademy.blog.common.blog.dto.BlogDto;
-import eu.codeacademy.blog.common.blog.exception.BlogNotFoundException;
-import eu.codeacademy.blog.common.blog.mapper.BlogMapper;
-import eu.codeacademy.blog.common.user.service.UserService;
-import eu.codeacademy.blog.common.utils.CurrentDate;
+import eu.codeacademy.blog.api.dto.BlogDto;
+import eu.codeacademy.blog.api.exception.BlogNotFoundException;
+import eu.codeacademy.blog.api.mapper.BlogMapper;
+import eu.codeacademy.blog.api.utils.CurrentDate;
 import eu.codeacademy.blog.jpa.blog.entity.Blog;
 import eu.codeacademy.blog.jpa.blog.repository.BlogRepository;
 import eu.codeacademy.blog.jpa.user.entity.User;

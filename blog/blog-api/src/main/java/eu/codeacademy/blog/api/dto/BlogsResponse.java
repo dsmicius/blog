@@ -1,6 +1,5 @@
 package eu.codeacademy.blog.api.dto;
 
-import eu.codeacademy.blog.common.blog.dto.BlogDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;

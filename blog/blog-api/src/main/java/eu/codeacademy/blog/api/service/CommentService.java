@@ -1,13 +1,11 @@
-package eu.codeacademy.blog.common.comment.service;
+package eu.codeacademy.blog.api.service;
 
-import eu.codeacademy.blog.common.blog.dto.BlogDto;
-import eu.codeacademy.blog.common.blog.service.BlogService;
-import eu.codeacademy.blog.common.comment.dto.CommentDto;
-import eu.codeacademy.blog.common.comment.exception.CommentDeleteException;
-import eu.codeacademy.blog.common.comment.mapper.CommentMapper;
-import eu.codeacademy.blog.common.user.dto.UserDto;
-import eu.codeacademy.blog.common.user.service.UserService;
-import eu.codeacademy.blog.common.utils.CurrentDate;
+import eu.codeacademy.blog.api.dto.BlogDto;
+import eu.codeacademy.blog.api.dto.CommentDto;
+import eu.codeacademy.blog.api.dto.UserDto;
+import eu.codeacademy.blog.api.exception.CommentDeleteException;
+import eu.codeacademy.blog.api.mapper.CommentMapper;
+import eu.codeacademy.blog.api.utils.CurrentDate;
 import eu.codeacademy.blog.jpa.blog.entity.Blog;
 import eu.codeacademy.blog.jpa.comment.entity.Comment;
 import eu.codeacademy.blog.jpa.comment.repository.CommentRepository;

@@ -1,7 +1,7 @@
 package eu.codeacademy.blog.api.controller;
 
 import eu.codeacademy.blog.api.dto.BlogsResponse;
-import eu.codeacademy.blog.common.blog.dto.BlogDto;
+import eu.codeacademy.blog.api.dto.BlogDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

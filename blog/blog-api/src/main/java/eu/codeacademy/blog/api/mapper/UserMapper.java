@@ -1,7 +1,7 @@
-package eu.codeacademy.blog.common.user.mapper;
+package eu.codeacademy.blog.api.mapper;
 
-import eu.codeacademy.blog.common.user.dto.UserDto;
-import eu.codeacademy.blog.common.user.dto.UserRoleDto;
+import eu.codeacademy.blog.api.dto.UserDto;
+import eu.codeacademy.blog.api.dto.UserRoleDto;
 import eu.codeacademy.blog.jpa.user.entity.Authority;
 import eu.codeacademy.blog.jpa.user.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

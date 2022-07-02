@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.common.utils;
+package eu.codeacademy.blog.api.utils;
 
 import org.springframework.stereotype.Component;
 

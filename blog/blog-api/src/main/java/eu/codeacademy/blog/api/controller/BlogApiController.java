@@ -1,8 +1,8 @@
 package eu.codeacademy.blog.api.controller;
 
 import eu.codeacademy.blog.api.dto.BlogsResponse;
-import eu.codeacademy.blog.common.blog.dto.BlogDto;
-import eu.codeacademy.blog.common.blog.service.BlogService;
+import eu.codeacademy.blog.api.dto.BlogDto;
+import eu.codeacademy.blog.api.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

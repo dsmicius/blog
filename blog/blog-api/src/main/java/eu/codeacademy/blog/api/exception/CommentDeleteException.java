@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.common.comment.exception;
+package eu.codeacademy.blog.api.exception;
 
 public class CommentDeleteException extends RuntimeException{
 

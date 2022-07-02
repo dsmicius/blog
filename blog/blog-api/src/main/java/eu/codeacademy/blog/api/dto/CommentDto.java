@@ -1,6 +1,5 @@
-package eu.codeacademy.blog.common.comment.dto;
+package eu.codeacademy.blog.api.dto;
 
-import eu.codeacademy.blog.common.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Data;
 
