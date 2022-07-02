@@ -1,5 +1,8 @@
 package eu.codeacademy.blog.api.service;
 
+import eu.codeacademy.blog.jpa.blog.repository.FileRepository;
+import eu.codeacademy.blog.jpa.file.File;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -14,29 +17,38 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FileService {
+
+    private final FileRepository fileRepository;
     private final Path fileLocation = Paths.get("./files").toAbsolutePath().normalize();
 
     public void saveFile(MultipartFile file) {
         createDirectory();
+
         try {
-            Path filePathWithFileName = fileLocation.resolve(getUniqFileName(file));
+            String originalFileName = file.getOriginalFilename();
+            int dot = originalFileName.lastIndexOf(".");
+            String fileName = originalFileName.substring(0, dot);
+            String fileExtention = originalFileName.substring(dot + 1);
+
+            File savedFileInDb = fileRepository.save(
+                    File.builder()
+                            .fileName(fileName)
+                            .fileExtension(fileExtention)
+                            .size(file.getSize())
+                            .mediaType(file.getContentType())
+                            .build());
+
+            Path filePathWithFileName = fileLocation.resolve(savedFileInDb.getUniqFileName());
             Files.copy(file.getInputStream(), filePathWithFileName, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             log.error("Cannot create file", e);
             e.printStackTrace();
         }
-    }
-
-    private String getUniqFileName(MultipartFile file) {
-        String fileName = file.getOriginalFilename();
-        int nanoDate = LocalDateTime.now().getNano();
-
-        return String.format("%s_%s", nanoDate, fileName);
     }
 
     private void createDirectory() {

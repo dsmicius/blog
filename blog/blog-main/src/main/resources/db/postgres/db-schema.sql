@@ -49,3 +49,15 @@ CREATE TABLE IF NOT EXISTS users_authorities
     user_id        BIGINT NOT NULL,
     authorities_id BIGINT NOT NULL
 );
+
+
+CREATE TABLE IF NOT EXISTS file
+(
+    id                BIGSERIAL PRIMARY KEY,
+    file_id           UUID           NOT NULL,
+    file_name         VARCHAR(100)   NOT NULL,
+    file_extension    VARCHAR(15)    NOT NULL,
+    media_type        VARCHAR(20)    NOT NULL,
+    size              BIGINT         NOT NULL,
+    timestamp         TIMESTAMP      DEFAULT current_timestamp
+);
