@@ -1,10 +1,13 @@
 package eu.codeacademy.blog.api.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,5 +46,18 @@ public class FileService {
             log.error("Cannot create directory", e);
             e.printStackTrace();
         }
+    }
+
+    public Resource getFile(String filename) {
+        try {
+            InputStream inputStream = Files.newInputStream(fileLocation.resolve(filename));
+            return new InputStreamResource(inputStream);
+
+        } catch (IOException e) {
+            log.error("can't get file", e);
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

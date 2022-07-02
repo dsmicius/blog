@@ -1,4 +1,5 @@
 rootProject.name = 'blog'
+
 include 'blog-main'
 include 'blog-mvc'
 include 'blog-jpa'
