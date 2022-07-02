@@ -61,7 +61,7 @@ public class BlogService {
     }
 
     @Transactional
-    public void updateBlog(BlogDto blogDto) {
+    public boolean updateBlog(BlogDto blogDto) {
         Optional<Blog> blogOptional = blogRepository.findByBlogId(blogDto.getBlogId());
         if (blogOptional.isPresent()) {
             Blog blog = blogOptional.get().toBuilder()
@@ -74,7 +74,10 @@ public class BlogService {
                     .status(blogDto.getStatus())
                     .build();
             blogRepository.save(blog);
+
+            return true;
         }
+        return false;
     }
 
     @Transactional

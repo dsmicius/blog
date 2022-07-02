@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -59,13 +61,26 @@ public class BlogApiController {
 
     @DeleteMapping(
             path = UUID_PATH)
+    @ApiOperation(value = "delete Blog")
     public void deleteBlog(@PathVariable("uuid") UUID blogId) {
         blogService.deleteBlog(blogId);
     }
 
     // TODO: reikia kazka sugalvoti del requestBody perdavimo, nes negalima perduoti dvieju objektu. Vadinasi Useris turi ateiti gal kaip parametras?
     @PostMapping
-    public void createBlog(@Valid @RequestBody BlogDto blogDto, @RequestParam String email) {
+    @ApiOperation(value = "create Blog")
+    public ResponseEntity<Void> createBlog(@Valid @RequestBody BlogDto blogDto, @RequestParam String email) {
         blogService.addBlog(blogDto, email);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping
+    @ApiOperation(value = "update Blog")
+    public ResponseEntity<Void> updateBlog(@Valid @RequestBody BlogDto blogDto) {
+        if (blogService.updateBlog(blogDto)) {
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
