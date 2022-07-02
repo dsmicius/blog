@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +41,16 @@ public class BlogApiController {
     }
     )
     public BlogsResponse getBlogs() {
-
         return BlogsResponse.builder().blogs(blogService.getBlogs()).build();
     }
+
+    @GetMapping("/page")
+    @ApiOperation(value = "Get Blogs Pagable")
+    public Page<BlogDto> getBlogsPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return blogService.getBlogPaginated(PageRequest.of(page, size));
+    }
+
+
 
     @GetMapping(
             path = UUID_PATH,
@@ -61,14 +70,14 @@ public class BlogApiController {
 
     @DeleteMapping(
             path = UUID_PATH)
-    @ApiOperation(value = "delete Blog")
+    @ApiOperation(value = "delete Blog", httpMethod = "DELETE")
     public void deleteBlog(@PathVariable("uuid") UUID blogId) {
         blogService.deleteBlog(blogId);
     }
 
     // TODO: reikia kazka sugalvoti del requestBody perdavimo, nes negalima perduoti dvieju objektu. Vadinasi Useris turi ateiti gal kaip parametras?
     @PostMapping
-    @ApiOperation(value = "create Blog")
+    @ApiOperation(value = "create Blog", httpMethod = "POST")
     public ResponseEntity<Void> createBlog(@Valid @RequestBody BlogDto blogDto, @RequestParam String email) {
         blogService.addBlog(blogDto, email);
 
@@ -76,7 +85,7 @@ public class BlogApiController {
     }
 
     @PutMapping
-    @ApiOperation(value = "update Blog")
+    @ApiOperation(value = "update Blog", httpMethod = "PUT")
     public ResponseEntity<Void> updateBlog(@Valid @RequestBody BlogDto blogDto) {
         if (blogService.updateBlog(blogDto)) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
