@@ -6,9 +6,6 @@ import eu.codeacademy.blog.jpa.user.entity.User;
 import eu.codeacademy.blog.jpa.user.repository.AuthorityRepository;
 import eu.codeacademy.blog.jpa.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,18 +14,19 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+//public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
     private final UserMapper userMapper;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findUserByEmailWithAuthorities(username)
-                .map(userMapper::toDto)
-                .orElseThrow(() -> new UsernameNotFoundException("'" + username + "' not found!"));
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return userRepository.findUserByEmailWithAuthorities(username)
+//                .map(userMapper::toDto)
+//                .orElseThrow(() -> new UsernameNotFoundException("'" + username + "' not found!"));
+//    }
 
     public Optional<User> getUserEntityByUserName(String email) {
         return userRepository.findUserByEmailWithAuthorities(email);
