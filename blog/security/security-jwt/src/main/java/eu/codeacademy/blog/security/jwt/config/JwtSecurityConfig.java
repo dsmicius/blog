@@ -2,6 +2,7 @@ package eu.codeacademy.blog.security.jwt.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.codeacademy.blog.security.jwt.filter.JwtAuthenticationFilter;
+import eu.codeacademy.blog.security.jwt.service.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final ObjectMapper objectMapper;
     private final UserDetailsService userDetailsService;
+    private final JwtProvider jwtProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -50,7 +52,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // set filters
         http
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), objectMapper));
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), objectMapper, jwtProvider));
     }
 
     @Override
