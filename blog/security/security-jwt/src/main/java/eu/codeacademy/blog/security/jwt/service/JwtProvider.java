@@ -12,6 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +26,14 @@ public class JwtProvider {
     @Value("#{${security.jwt.validity-time} * 60 * 1000}")
     private long tokenValidityInMillis;
 
-    @Value("${security.jwt.secret-key}")
-    private byte[] secretKey;
+    private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
+
+    private SecretKey secretKey;
+
+    @PostConstruct
+    protected void init() {
+        secretKey = Keys.secretKeyFor(signatureAlgorithm);
+    }
 
     public String getToken(UserRoleDto principal) {
         return Jwts.builder()
@@ -38,7 +46,7 @@ public class JwtProvider {
                 .claim("roles", principal.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toSet()))
-                .signWith(Keys.hmacShaKeyFor(secretKey), SignatureAlgorithm.HS512)
+                .signWith(secretKey)
                 .compact();
     }
 
