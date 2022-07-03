@@ -20,9 +20,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtProvider {
-
-    private final static Date NOW = new Date();
-
     @Value("#{${security.jwt.validity-time} * 60 * 1000}")
     private long tokenValidityInMillis;
 
@@ -36,13 +33,15 @@ public class JwtProvider {
     }
 
     public String getToken(UserRoleDto principal) {
+        final Date now = new Date();
+
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setIssuer("blog-api")
                 .setAudience("blog-ui")
                 .setSubject(principal.getUsername())
-                .setIssuedAt(NOW)
-                .setExpiration(new Date(NOW.getTime() + tokenValidityInMillis))
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + tokenValidityInMillis))
                 .claim("roles", principal.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toSet()))
@@ -65,5 +64,9 @@ public class JwtProvider {
                 .collect(Collectors.toList());
 
         return new UsernamePasswordAuthenticationToken(username, null, authorities);
+    }
+
+    public Long getExpiresInSeconds() {
+        return tokenValidityInMillis / 1000;
     }
 }
