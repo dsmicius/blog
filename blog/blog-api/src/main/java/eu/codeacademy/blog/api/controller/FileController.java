@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,7 @@ public class FileController {
             @ApiResponse(code = 401, message = "Prisijunkite jei norit gauti atsakyma")
     })
     @PostMapping(UPLOAD_PATH)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public FileResponse saveFile(@RequestParam MultipartFile file) {
 
         return fileService.saveFile(file);
