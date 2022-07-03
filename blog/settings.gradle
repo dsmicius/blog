@@ -5,4 +5,5 @@ include 'blog-jpa'
 include 'blog-api'
 include 'security'
 include 'security:security-basic'
+include 'security:security-jwt'
 

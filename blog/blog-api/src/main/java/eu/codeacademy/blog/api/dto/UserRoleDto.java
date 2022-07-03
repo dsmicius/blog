@@ -2,7 +2,6 @@ package eu.codeacademy.blog.api.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +14,9 @@ public class UserRoleDto {
     private UserDto user;
 
     @Builder.Default
-    private Set<? extends GrantedAuthority> roles = new HashSet<>();
+//    private Set<? extends GrantedAuthority> roles = new HashSet<>();
+
+    private Set<String> roles = new HashSet<>();
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
