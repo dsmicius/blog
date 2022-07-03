@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-group = 'eu.codeacademy'
+group = 'eu.codeacademy.blog'
 version = '0.0.1-SNAPSHOT'
 
 

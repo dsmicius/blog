@@ -1,4 +1,4 @@
-package eu.codeacademy.blog.jpa.user.entity;
+package eu.codeacademy.blog.security.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

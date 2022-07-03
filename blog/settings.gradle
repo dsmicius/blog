@@ -6,4 +6,6 @@ include 'blog-api'
 include 'security'
 include 'security:security-basic'
 include 'security:security-jwt'
+include 'security:security-jpa'
+
 

@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(tags = "File Controller")
 public class FileController {
 
-    private static final String FILE_ROOT_PATH = "/api/file";
+    private static final String FILE_ROOT_PATH = "/file";
     private static final String UPLOAD_PATH = FILE_ROOT_PATH + "/upload";
     private static final String DOWNLOAD_PATH = FILE_ROOT_PATH + "/download";
     private final FileService fileService;

@@ -1,7 +1,7 @@
 package eu.codeacademy.blog.jpa.comment.entity;
 
 import eu.codeacademy.blog.jpa.blog.entity.Blog;
-import eu.codeacademy.blog.jpa.user.entity.User;
+import eu.codeacademy.blog.security.jpa.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

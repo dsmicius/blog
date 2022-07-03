@@ -1,8 +1,8 @@
 package eu.codeacademy.blog.api.mapper;
 
 import eu.codeacademy.blog.api.dto.CommentDto;
-import eu.codeacademy.blog.api.dto.UserDto;
 import eu.codeacademy.blog.jpa.comment.entity.Comment;
+import eu.codeacademy.blog.security.jwt.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 @Component

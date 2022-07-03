@@ -1,5 +1,6 @@
 package eu.codeacademy.blog.api.dto;
 
+import eu.codeacademy.blog.security.jwt.dto.UserDto;
 import lombok.Builder;
 import lombok.Data;
 

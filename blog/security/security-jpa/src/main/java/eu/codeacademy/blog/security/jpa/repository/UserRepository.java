@@ -1,6 +1,6 @@
-package eu.codeacademy.blog.jpa.user.repository;
+package eu.codeacademy.blog.security.jpa.repository;
 
-import eu.codeacademy.blog.jpa.user.entity.User;
+import eu.codeacademy.blog.security.jpa.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

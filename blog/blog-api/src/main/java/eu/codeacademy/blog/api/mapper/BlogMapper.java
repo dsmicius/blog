@@ -1,8 +1,8 @@
 package eu.codeacademy.blog.api.mapper;
 
 import eu.codeacademy.blog.api.dto.BlogDto;
-import eu.codeacademy.blog.api.dto.UserDto;
 import eu.codeacademy.blog.jpa.blog.entity.Blog;
+import eu.codeacademy.blog.security.jwt.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

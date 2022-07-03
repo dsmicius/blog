@@ -1,13 +1,14 @@
-package eu.codeacademy.blog.api.mapper;
+package eu.codeacademy.blog.security.jwt.mapper;
 
-import eu.codeacademy.blog.api.dto.UserDto;
-import eu.codeacademy.blog.api.dto.UserRoleDto;
-import eu.codeacademy.blog.jpa.user.entity.Authority;
-import eu.codeacademy.blog.jpa.user.entity.User;
+import eu.codeacademy.blog.security.jpa.entity.Authority;
+import eu.codeacademy.blog.security.jpa.entity.User;
+import eu.codeacademy.blog.security.jwt.dto.UserDto;
+import eu.codeacademy.blog.security.jwt.dto.UserRoleDto;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
@@ -22,13 +23,12 @@ public class UserMapper {
                         .phoneNumber(userEntity.getPhoneNumber())
                         .zipCode(userEntity.getZipCode())
                         .build())
-                .roles(Set.of("ROLE_ADMIN"))
-//                .roles(
-//                        userEntity.getAuthorities().stream()
-//                                .map(getAuthority())
-//                                .map(SimpleGrantedAuthority::new)
-//                                .collect(Collectors.toUnmodifiableSet())
-//                )
+                .roles(
+                        userEntity.getAuthorities().stream()
+                                .map(getAuthority())
+                                .map(SimpleGrantedAuthority::new)
+                                .collect(Collectors.toUnmodifiableSet())
+                )
                 .build();
     }
 

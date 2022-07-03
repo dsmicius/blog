@@ -2,10 +2,8 @@ package eu.codeacademy.blog.api.controller;
 
 import eu.codeacademy.blog.api.dto.BlogsResponse;
 import eu.codeacademy.blog.api.dto.BlogDto;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,7 @@ import java.util.UUID;
 public interface BlogApiSpecification {
 
     String UUID_PATH = "/{uuid}";
-    String BLOG_API_ROOT_PATH = "/api/blogs";
+    String BLOG_API_ROOT_PATH = "/blogs";
 
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -32,6 +30,24 @@ public interface BlogApiSpecification {
     }
     )
     public BlogsResponse getBlogs();
+
+    @GetMapping("/page")
+    @ApiOperation(value = "Get all Blogs by page and size")
+    public Page<BlogDto> getBlogsPaginated(@ApiParam(
+            name = "page",
+            type = "int",
+            value = "Number of page",
+            example = "1",
+            required = true)
+            @RequestParam("page") int page,
+
+            @ApiParam(
+            name = "size",
+            type = "int",
+            value = "Content size in page",
+            example = "1",
+            required = true)
+            @RequestParam("size") int size);
 
     @GetMapping(
             path = UUID_PATH,

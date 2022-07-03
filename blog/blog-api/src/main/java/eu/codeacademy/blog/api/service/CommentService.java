@@ -2,15 +2,16 @@ package eu.codeacademy.blog.api.service;
 
 import eu.codeacademy.blog.api.dto.BlogDto;
 import eu.codeacademy.blog.api.dto.CommentDto;
-import eu.codeacademy.blog.api.dto.UserDto;
 import eu.codeacademy.blog.api.exception.CommentDeleteException;
 import eu.codeacademy.blog.api.mapper.CommentMapper;
 import eu.codeacademy.blog.api.utils.CurrentDate;
 import eu.codeacademy.blog.jpa.blog.entity.Blog;
 import eu.codeacademy.blog.jpa.comment.entity.Comment;
 import eu.codeacademy.blog.jpa.comment.repository.CommentRepository;
-import eu.codeacademy.blog.jpa.user.entity.Authority;
-import eu.codeacademy.blog.jpa.user.entity.User;
+import eu.codeacademy.blog.security.jpa.entity.Authority;
+import eu.codeacademy.blog.security.jpa.entity.User;
+import eu.codeacademy.blog.security.jwt.dto.UserDto;
+import eu.codeacademy.blog.security.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
