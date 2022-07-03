@@ -2,6 +2,7 @@ package eu.codeacademy.blog.security.jwt.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.codeacademy.blog.security.jwt.filter.JwtAuthenticationFilter;
+import eu.codeacademy.blog.security.jwt.filter.JwtAuthorizationFilter;
 import eu.codeacademy.blog.security.jwt.service.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -52,7 +54,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // set filters
         http
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), objectMapper, jwtProvider));
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), objectMapper, jwtProvider))
+                .addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
