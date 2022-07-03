@@ -1,8 +1,9 @@
 package eu.codeacademy.blog.api.controller;
 
-import eu.codeacademy.blog.api.dto.BlogsResponse;
 import eu.codeacademy.blog.api.dto.BlogDto;
+import eu.codeacademy.blog.api.dto.BlogsResponse;
 import eu.codeacademy.blog.api.service.BlogService;
+import eu.codeacademy.blog.commons.swagger.annotation.OpenApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@OpenApi
 public class BlogApiController implements BlogApiSpecification{
 
     private final BlogService blogService;

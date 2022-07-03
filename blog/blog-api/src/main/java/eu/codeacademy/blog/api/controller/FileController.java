@@ -2,6 +2,7 @@ package eu.codeacademy.blog.api.controller;
 
 import eu.codeacademy.blog.api.dto.FileResponse;
 import eu.codeacademy.blog.api.service.FileService;
+import eu.codeacademy.blog.commons.swagger.annotation.OpenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = "File Controller")
+@OpenApi
 public class FileController {
 
     private static final String FILE_ROOT_PATH = "/file";
